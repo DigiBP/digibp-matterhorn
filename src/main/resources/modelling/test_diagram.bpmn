@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.11.3">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.11.3">
   <bpmn:collaboration id="Collaboration_0jvsqzm">
     <bpmn:participant id="Participant_1t3dxhc" name="SAP Incident Handling" processRef="Process_test" />
   </bpmn:collaboration>
@@ -10,10 +10,10 @@
         <bpmn:flowNodeRef>Task_07cq275</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1lot22q" name="SAP service owner">
-        <bpmn:flowNodeRef>Task_1onipw7</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0uttakk</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>EndEvent_0b95hcr</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1jm9wag</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1onipw7</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_16o3ipg">
@@ -28,10 +28,6 @@
       </bpmn:dataOutputAssociation>
     </bpmn:task>
     <bpmn:dataStoreReference id="DataStoreReference_0am1dzm" name="Database" />
-    <bpmn:task id="Task_1onipw7" name="Evaluate incident">
-      <bpmn:incoming>SequenceFlow_1ppzupg</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0csuiu6</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_1ppzupg" sourceRef="Task_07cq275" targetRef="Task_1onipw7" />
     <bpmn:sequenceFlow id="SequenceFlow_0csuiu6" sourceRef="Task_1onipw7" targetRef="ExclusiveGateway_0uttakk" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_0uttakk" name="Entries correct?">
@@ -39,17 +35,30 @@
       <bpmn:outgoing>SequenceFlow_0aktibv</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1e9vzoh</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_0aktibv" name="Yes" sourceRef="ExclusiveGateway_0uttakk" targetRef="EndEvent_0b95hcr" />
+    <bpmn:sequenceFlow id="SequenceFlow_0aktibv" name="Yes" sourceRef="ExclusiveGateway_0uttakk" targetRef="EndEvent_0b95hcr">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${evaluation==true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:endEvent id="EndEvent_0b95hcr">
       <bpmn:incoming>SequenceFlow_0aktibv</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0cfkrmv</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_1e9vzoh" name="No" sourceRef="ExclusiveGateway_0uttakk" targetRef="Task_1jm9wag" />
+    <bpmn:sequenceFlow id="SequenceFlow_1e9vzoh" name="No" sourceRef="ExclusiveGateway_0uttakk" targetRef="Task_1jm9wag">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${evaluation==false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:task id="Task_1jm9wag" name="Correct faulty entries">
       <bpmn:incoming>SequenceFlow_1e9vzoh</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0cfkrmv</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_0cfkrmv" sourceRef="Task_1jm9wag" targetRef="EndEvent_0b95hcr" />
+    <bpmn:userTask id="Task_1onipw7" name="Evaluate incident">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="evaluation" label="evaluation" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1ppzupg</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0csuiu6</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0jvsqzm">
@@ -94,14 +103,11 @@
       <bpmndi:BPMNShape id="Lane_1lot22q_di" bpmnElement="Lane_1lot22q">
         <dc:Bounds x="164" y="354" width="570" height="223" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Task_1onipw7_di" bpmnElement="Task_1onipw7">
-        <dc:Bounds x="282" y="375" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1ppzupg_di" bpmnElement="SequenceFlow_1ppzupg">
         <di:waypoint xsi:type="dc:Point" x="332" y="257" />
         <di:waypoint xsi:type="dc:Point" x="332" y="375" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="347" y="309" width="0" height="13" />
+          <dc:Bounds x="347" y="309.5" width="0" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0csuiu6_di" bpmnElement="SequenceFlow_0csuiu6">
@@ -143,6 +149,9 @@
           <dc:Bounds x="587" y="464" width="0" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0j4da4e_di" bpmnElement="Task_1onipw7">
+        <dc:Bounds x="282" y="375" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
