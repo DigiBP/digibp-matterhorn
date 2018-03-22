@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.11.3">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.11.3">
   <bpmn:collaboration id="Collaboration_0jvsqzm">
-    <bpmn:participant id="Participant_1t3dxhc" name="test lane" processRef="Process_test" />
+    <bpmn:participant id="Participant_1t3dxhc" name="SAP Incident Handling" processRef="Process_test" />
   </bpmn:collaboration>
   <bpmn:process id="Process_test" name="test process" isExecutable="true">
     <bpmn:startEvent id="StartEvent_16o3ipg">
       <bpmn:outgoing>SequenceFlow_1hkxkqf</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:task id="Task_1gjbevd" name="test task">
+    <bpmn:task id="Task_1gjbevd" name="Record incident ticket">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property />
+        </camunda:properties>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="problemDescriptoin" />
+          <camunda:inputParameter name="sapModule">
+            <camunda:list>
+              <camunda:value>Finance</camunda:value>
+              <camunda:value>Sales</camunda:value>
+            </camunda:list>
+          </camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1hkxkqf</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_02p6gq4</bpmn:outgoing>
     </bpmn:task>
