@@ -10,8 +10,10 @@
         <bpmn:flowNodeRef>Task_07cq275</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1lot22q" name="SAP service owner">
-        <bpmn:flowNodeRef>EndEvent_0b95hcr</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1onipw7</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ExclusiveGateway_0uttakk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_0b95hcr</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_1jm9wag</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:startEvent id="StartEvent_16o3ipg">
@@ -26,20 +28,33 @@
       </bpmn:dataOutputAssociation>
     </bpmn:task>
     <bpmn:dataStoreReference id="DataStoreReference_0am1dzm" name="Database" />
-    <bpmn:endEvent id="EndEvent_0b95hcr">
-      <bpmn:incoming>SequenceFlow_0csuiu6</bpmn:incoming>
-    </bpmn:endEvent>
     <bpmn:task id="Task_1onipw7" name="Evaluate incident">
       <bpmn:incoming>SequenceFlow_1ppzupg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0csuiu6</bpmn:outgoing>
     </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_1ppzupg" sourceRef="Task_07cq275" targetRef="Task_1onipw7" />
-    <bpmn:sequenceFlow id="SequenceFlow_0csuiu6" sourceRef="Task_1onipw7" targetRef="EndEvent_0b95hcr" />
+    <bpmn:sequenceFlow id="SequenceFlow_0csuiu6" sourceRef="Task_1onipw7" targetRef="ExclusiveGateway_0uttakk" />
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0uttakk" name="Entries correct?">
+      <bpmn:incoming>SequenceFlow_0csuiu6</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0aktibv</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1e9vzoh</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0aktibv" name="Yes" sourceRef="ExclusiveGateway_0uttakk" targetRef="EndEvent_0b95hcr" />
+    <bpmn:endEvent id="EndEvent_0b95hcr">
+      <bpmn:incoming>SequenceFlow_0aktibv</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0cfkrmv</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1e9vzoh" name="No" sourceRef="ExclusiveGateway_0uttakk" targetRef="Task_1jm9wag" />
+    <bpmn:task id="Task_1jm9wag" name="Correct faulty entries">
+      <bpmn:incoming>SequenceFlow_1e9vzoh</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0cfkrmv</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SequenceFlow_0cfkrmv" sourceRef="Task_1jm9wag" targetRef="EndEvent_0b95hcr" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0jvsqzm">
       <bpmndi:BPMNShape id="Participant_1t3dxhc_di" bpmnElement="Participant_1t3dxhc">
-        <dc:Bounds x="134" y="104" width="600" height="370" />
+        <dc:Bounds x="134" y="104" width="600" height="473" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_16o3ipg_di" bpmnElement="StartEvent_16o3ipg">
         <dc:Bounds x="195" y="199" width="36" height="36" />
@@ -55,9 +70,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_0b95hcr_di" bpmnElement="EndEvent_0b95hcr">
-        <dc:Bounds x="531" y="397" width="36" height="36" />
+        <dc:Bounds x="621" y="397" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="504" y="436" width="90" height="13" />
+          <dc:Bounds x="594" y="436" width="90" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_07cq275_di" bpmnElement="Task_07cq275">
@@ -77,7 +92,7 @@
         <dc:Bounds x="164" y="104" width="570" height="250" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_1lot22q_di" bpmnElement="Lane_1lot22q">
-        <dc:Bounds x="164" y="354" width="570" height="120" />
+        <dc:Bounds x="164" y="354" width="570" height="223" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_1onipw7_di" bpmnElement="Task_1onipw7">
         <dc:Bounds x="282" y="375" width="100" height="80" />
@@ -91,9 +106,41 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0csuiu6_di" bpmnElement="SequenceFlow_0csuiu6">
         <di:waypoint xsi:type="dc:Point" x="382" y="415" />
-        <di:waypoint xsi:type="dc:Point" x="531" y="415" />
+        <di:waypoint xsi:type="dc:Point" x="448" y="415" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="456.5" y="393" width="0" height="13" />
+          <dc:Bounds x="415" y="393.5" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0uttakk_di" bpmnElement="ExclusiveGateway_0uttakk" isMarkerVisible="true">
+        <dc:Bounds x="448" y="390" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="435" y="443" width="78" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0aktibv_di" bpmnElement="SequenceFlow_0aktibv">
+        <di:waypoint xsi:type="dc:Point" x="498" y="415" />
+        <di:waypoint xsi:type="dc:Point" x="621" y="415" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="550" y="394" width="19" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Task_1jm9wag_di" bpmnElement="Task_1jm9wag">
+        <dc:Bounds x="423" y="487" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1e9vzoh_di" bpmnElement="SequenceFlow_1e9vzoh">
+        <di:waypoint xsi:type="dc:Point" x="473" y="440" />
+        <di:waypoint xsi:type="dc:Point" x="473" y="487" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="481" y="457" width="15" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0cfkrmv_di" bpmnElement="SequenceFlow_0cfkrmv">
+        <di:waypoint xsi:type="dc:Point" x="523" y="527" />
+        <di:waypoint xsi:type="dc:Point" x="572" y="527" />
+        <di:waypoint xsi:type="dc:Point" x="572" y="415" />
+        <di:waypoint xsi:type="dc:Point" x="621" y="415" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="587" y="464" width="0" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
