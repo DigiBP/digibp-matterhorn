@@ -14,8 +14,12 @@
     <bpmn:task id="Task_07cq275" name="Record incident">
       <bpmn:incoming>SequenceFlow_1hkxkqf</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1xa3o1a</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0gstbrf">
+        <bpmn:targetRef>DataStoreReference_0am1dzm</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:task>
     <bpmn:sequenceFlow id="SequenceFlow_1xa3o1a" sourceRef="Task_07cq275" targetRef="EndEvent_0b95hcr" />
+    <bpmn:dataStoreReference id="DataStoreReference_0am1dzm" name="Database" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0jvsqzm">
@@ -50,6 +54,16 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="411.5" y="195" width="0" height="13" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="DataStoreReference_0am1dzm_di" bpmnElement="DataStoreReference_0am1dzm">
+        <dc:Bounds x="524" y="273" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="525" y="326" width="48" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0gstbrf_di" bpmnElement="DataOutputAssociation_0gstbrf">
+        <di:waypoint xsi:type="dc:Point" x="382" y="235" />
+        <di:waypoint xsi:type="dc:Point" x="524" y="287" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
