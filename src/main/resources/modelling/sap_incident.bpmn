@@ -13,14 +13,14 @@
         <bpmn:flowNodeRef>Task_1jd9ev1</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1mbecce</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_093bb6a</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_07cq275</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>record_incident</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>StartEvent_16o3ipg</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_0vy9dvj</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>extract_attributes</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1lot22q" name="SAP service owner">
         <bpmn:flowNodeRef>ExclusiveGateway_0uttakk</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_1onipw7</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Task_1qkdncl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>evaluate_incident</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>evaluate_possibilities</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_16btmyl</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1iyj299</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_1k6us0r</bpmn:flowNodeRef>
@@ -37,14 +37,14 @@
         <bpmn:flowNodeRef>Task_0uyuz7m</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0uzzr8g" name="Head of SAP CC">
-        <bpmn:flowNodeRef>Task_1vthoke</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0iitujm</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_0af6y6f</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>define_importance</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:sequenceFlow id="SequenceFlow_1hkxkqf" sourceRef="StartEvent_16o3ipg" targetRef="Task_07cq275" />
-    <bpmn:sequenceFlow id="SequenceFlow_1ppzupg" sourceRef="Task_07cq275" targetRef="Task_0vy9dvj" />
-    <bpmn:sequenceFlow id="SequenceFlow_0csuiu6" sourceRef="Task_1onipw7" targetRef="ExclusiveGateway_0uttakk" />
+    <bpmn:sequenceFlow id="SequenceFlow_1hkxkqf" sourceRef="StartEvent_16o3ipg" targetRef="record_incident" />
+    <bpmn:sequenceFlow id="SequenceFlow_1ppzupg" sourceRef="record_incident" targetRef="extract_attributes" />
+    <bpmn:sequenceFlow id="SequenceFlow_0csuiu6" sourceRef="evaluate_incident" targetRef="ExclusiveGateway_0uttakk" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_0uttakk" name="Entries correct?">
       <bpmn:incoming>SequenceFlow_0csuiu6</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0aktibv</bpmn:outgoing>
@@ -57,7 +57,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${evaluation_inc==false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0cfkrmv" sourceRef="Task_1jm9wag" targetRef="Task_0uyuz7m" />
-    <bpmn:userTask id="Task_1onipw7" name="Evaluate incident">
+    <bpmn:userTask id="evaluate_incident" name="Evaluate incident" camunda:assignee="manuel">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="evaluation_inc" label="evaluation_inc" type="boolean" />
@@ -66,7 +66,7 @@
       <bpmn:incoming>SequenceFlow_1topuiy</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0csuiu6</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1d2xzz3" sourceRef="Task_1qkdncl" targetRef="ExclusiveGateway_1b9ll3j" />
+    <bpmn:sequenceFlow id="SequenceFlow_1d2xzz3" sourceRef="evaluate_possibilities" targetRef="ExclusiveGateway_1b9ll3j" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_1b9ll3j" name="Solution can be found internally?">
       <bpmn:incoming>SequenceFlow_1d2xzz3</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0v4chon</bpmn:outgoing>
@@ -75,10 +75,13 @@
     <bpmn:sequenceFlow id="SequenceFlow_0v4chon" name="Yes" sourceRef="ExclusiveGateway_1b9ll3j" targetRef="ExclusiveGateway_064ypuv">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${evaluation_pos==true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:userTask id="Task_1qkdncl" name="Evaluate possibilities to solve the incident">
+    <bpmn:userTask id="evaluate_possibilities" name="Evaluate possibilities to solve the incident">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="evaluation_pos" label="evaluation_pos" type="boolean" />
+          <camunda:formField id="core" label="Incident occurs in a core process" type="boolean" />
+          <camunda:formField id="cost" label="Cost caused by the incident" type="long" />
+          <camunda:formField id="tool" label="Business need can be fulfilled with another tool than SAP	" type="boolean" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_13gaha4</bpmn:incoming>
@@ -86,14 +89,14 @@
       <bpmn:incoming>SequenceFlow_1evxs9w</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1d2xzz3</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_04bauob" name="No" sourceRef="ExclusiveGateway_1b9ll3j" targetRef="Task_1vthoke">
+    <bpmn:sequenceFlow id="SequenceFlow_04bauob" name="No" sourceRef="ExclusiveGateway_1b9ll3j" targetRef="define_importance">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${evaluation_pos==false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0e2jkxd" sourceRef="Task_1vthoke" targetRef="ExclusiveGateway_0af6y6f" />
+    <bpmn:sequenceFlow id="SequenceFlow_0e2jkxd" sourceRef="define_importance" targetRef="ExclusiveGateway_0af6y6f" />
     <bpmn:sequenceFlow id="SequenceFlow_0h0lzqn" sourceRef="ExclusiveGateway_064ypuv" targetRef="Task_16btmyl" />
     <bpmn:sequenceFlow id="SequenceFlow_1ds0e0k" sourceRef="Task_1iyj299" targetRef="ExclusiveGateway_064ypuv" />
     <bpmn:sequenceFlow id="SequenceFlow_1ffuyq3" name="No" sourceRef="ExclusiveGateway_0af6y6f" targetRef="Task_1iyj299">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${importance==false}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${importance=="low"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0af6y6f" name="High importance?">
       <bpmn:incoming>SequenceFlow_0e2jkxd</bpmn:incoming>
@@ -101,7 +104,7 @@
       <bpmn:outgoing>SequenceFlow_1ke99ro</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_1ke99ro" name="Yes" sourceRef="ExclusiveGateway_0af6y6f" targetRef="Task_0iitujm">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${importance==true}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${importance=="high"}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0qrq7bn" sourceRef="Task_1k6us0r" targetRef="ExclusiveGateway_064ypuv" />
     <bpmn:exclusiveGateway id="ExclusiveGateway_064ypuv">
@@ -111,15 +114,6 @@
       <bpmn:incoming>SequenceFlow_16svvka</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0h0lzqn</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Task_1vthoke" name="Define business importance of the incident">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="importance" label="importance" type="boolean" />
-        </camunda:formData>
-      </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_04bauob</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0e2jkxd</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_0lfpsaa" sourceRef="Task_16btmyl" targetRef="ExclusiveGateway_09jr8h7" />
     <bpmn:userTask id="Task_16btmyl" name="Evaluate solution">
       <bpmn:extensionElements>
@@ -138,7 +132,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_06r4dvq" name="Yes" sourceRef="ExclusiveGateway_09jr8h7" targetRef="Task_0lnxj4a">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${evaluation_sol==true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_13gaha4" name="No" sourceRef="ExclusiveGateway_09jr8h7" targetRef="Task_1qkdncl">
+    <bpmn:sequenceFlow id="SequenceFlow_13gaha4" name="No" sourceRef="ExclusiveGateway_09jr8h7" targetRef="evaluate_possibilities">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${evaluation_sol==false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1oue3b0" sourceRef="Task_1k6us0r" targetRef="Task_06reazp" />
@@ -156,11 +150,11 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0l6dxdy" sourceRef="Task_1jd9ev1" targetRef="Task_17bcy0z" />
     <bpmn:sequenceFlow id="SequenceFlow_10oowim" sourceRef="Task_17bcy0z" targetRef="EndEvent_0b95hcr" />
-    <bpmn:sequenceFlow id="SequenceFlow_09w1e1n" name="No" sourceRef="ExclusiveGateway_1mbecce" targetRef="Task_1qkdncl">
+    <bpmn:sequenceFlow id="SequenceFlow_09w1e1n" name="No" sourceRef="ExclusiveGateway_1mbecce" targetRef="evaluate_possibilities">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${success==false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_1topuiy" sourceRef="Task_0vy9dvj" targetRef="Task_1onipw7" />
-    <bpmn:sequenceFlow id="SequenceFlow_1evxs9w" sourceRef="Task_0uyuz7m" targetRef="Task_1qkdncl" />
+    <bpmn:sequenceFlow id="SequenceFlow_1topuiy" sourceRef="extract_attributes" targetRef="evaluate_incident" />
+    <bpmn:sequenceFlow id="SequenceFlow_1evxs9w" sourceRef="Task_0uyuz7m" targetRef="evaluate_possibilities" />
     <bpmn:userTask id="Task_1iyj299" name="Define workaround">
       <bpmn:incoming>SequenceFlow_1ffuyq3</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ds0e0k</bpmn:outgoing>
@@ -182,6 +176,9 @@
     <bpmn:userTask id="Task_1jm9wag" name="Correct faulty entries">
       <bpmn:incoming>SequenceFlow_1e9vzoh</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0cfkrmv</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0by54j6">
+        <bpmn:targetRef>DataStoreReference_0am1dzm</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:userTask>
     <bpmn:serviceTask id="Task_1cuuhjv" name="Request the user to test the solution" camunda:type="external" camunda:topic="testRequest">
       <bpmn:incoming>SequenceFlow_08bjxpc</bpmn:incoming>
@@ -221,8 +218,23 @@
       <bpmn:incoming>SequenceFlow_0cfkrmv</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0aktibv</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1evxs9w</bpmn:outgoing>
+      <bpmn:property id="Property_1iipfle" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_09e50j1">
+        <bpmn:sourceRef>DataStoreReference_0am1dzm</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1iipfle</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Task_07cq275" name="Record incident">
+    <bpmn:userTask id="record_incident" name="Record incident" camunda:assignee="taulant">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="priority" label="priority" type="enum" defaultValue="low">
+            <camunda:value id="low" name="low" />
+            <camunda:value id="medium" name="medium" />
+            <camunda:value id="high" name="high" />
+            <camunda:value id="urgent" name="urgent" />
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1hkxkqf</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ppzupg</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1jc72ia">
@@ -232,11 +244,18 @@
     <bpmn:startEvent id="StartEvent_16o3ipg">
       <bpmn:outgoing>SequenceFlow_1hkxkqf</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:dataStoreReference id="DataStoreReference_0am1dzm" name="Database" />
-    <bpmn:serviceTask id="Task_0vy9dvj" name="Extract attributes" camunda:type="external" camunda:topic="extractor">
+    <bpmn:serviceTask id="extract_attributes" name="Extract attributes" camunda:type="external" camunda:topic="extractor">
       <bpmn:incoming>SequenceFlow_1ppzupg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1topuiy</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_117tc8l">
+        <bpmn:targetRef>DataStoreReference_0am1dzm</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
+    <bpmn:businessRuleTask id="define_importance" name="Define business importance of the incident" camunda:resultVariable="importance" camunda:decisionRef="defImportance" camunda:mapDecisionResult="singleResult">
+      <bpmn:incoming>SequenceFlow_04bauob</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0e2jkxd</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:dataStoreReference id="DataStoreReference_0am1dzm" name="Database" />
   </bpmn:process>
   <bpmn:process id="Process_1i9b6ca" isExecutable="false" />
   <bpmn:message id="Message_158ccjn" name="proposal" />
@@ -267,9 +286,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataStoreReference_0am1dzm_di" bpmnElement="DataStoreReference_0am1dzm">
-        <dc:Bounds x="553" y="158" width="50" height="50" />
+        <dc:Bounds x="587" y="158" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="554" y="211" width="48" height="13" />
+          <dc:Bounds x="589" y="211" width="47" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0q3qaj5_di" bpmnElement="Lane_0q3qaj5">
@@ -320,7 +339,7 @@
           <dc:Bounds x="518" y="505.5" width="90" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_0j4da4e_di" bpmnElement="Task_1onipw7">
+      <bpmndi:BPMNShape id="UserTask_0j4da4e_di" bpmnElement="evaluate_incident">
         <dc:Bounds x="282" y="375" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1d2xzz3_di" bpmnElement="SequenceFlow_1d2xzz3">
@@ -332,7 +351,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1jc72ia_di" bpmnElement="DataOutputAssociation_1jc72ia">
         <di:waypoint xsi:type="dc:Point" x="382" y="183" />
-        <di:waypoint xsi:type="dc:Point" x="553" y="185" />
+        <di:waypoint xsi:type="dc:Point" x="587" y="185" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_1b9ll3j_di" bpmnElement="ExclusiveGateway_1b9ll3j" isMarkerVisible="true">
         <dc:Bounds x="870" y="390" width="50" height="50" />
@@ -347,21 +366,21 @@
           <dc:Bounds x="1022.2207792207794" y="393" width="19" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_1t72a7d_di" bpmnElement="Task_1qkdncl">
+      <bpmndi:BPMNShape id="UserTask_1t72a7d_di" bpmnElement="evaluate_possibilities">
         <dc:Bounds x="707" y="375" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_04bauob_di" bpmnElement="SequenceFlow_04bauob">
         <di:waypoint xsi:type="dc:Point" x="895" y="440" />
         <di:waypoint xsi:type="dc:Point" x="895" y="592" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="903" y="507.125" width="15" height="13" />
+          <dc:Bounds x="904" y="507" width="14" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0e2jkxd_di" bpmnElement="SequenceFlow_0e2jkxd">
         <di:waypoint xsi:type="dc:Point" x="945" y="632" />
         <di:waypoint xsi:type="dc:Point" x="1003" y="632" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="974" y="610.5" width="0" height="13" />
+          <dc:Bounds x="929" y="610.5" width="90" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Lane_0uzzr8g_di" bpmnElement="Lane_0uzzr8g">
@@ -416,9 +435,6 @@
           <dc:Bounds x="1182" y="457.5" width="0" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_14pvhb1_di" bpmnElement="Task_1vthoke">
-        <dc:Bounds x="845" y="592" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0lfpsaa_di" bpmnElement="SequenceFlow_0lfpsaa">
         <di:waypoint xsi:type="dc:Point" x="1343" y="415" />
         <di:waypoint xsi:type="dc:Point" x="1404" y="415" />
@@ -556,7 +572,7 @@
           <dc:Bounds x="302" y="347.5" width="90" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_0sfp814_di" bpmnElement="Task_0vy9dvj">
+      <bpmndi:BPMNShape id="ServiceTask_0sfp814_di" bpmnElement="extract_attributes">
         <dc:Bounds x="282" y="253" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_1dmlmy8_di" bpmnElement="Task_0uyuz7m">
@@ -597,7 +613,7 @@
       <bpmndi:BPMNShape id="ServiceTask_1vdlq2x_di" bpmnElement="Task_17bcy0z">
         <dc:Bounds x="1935" y="375" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_1jrd6mm_di" bpmnElement="Task_07cq275">
+      <bpmndi:BPMNShape id="UserTask_1jrd6mm_di" bpmnElement="record_incident">
         <dc:Bounds x="282" y="143" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_0ya6c48_di" bpmnElement="Task_1jm9wag">
@@ -613,6 +629,21 @@
       <bpmndi:BPMNShape id="UserTask_1rgsqh7_di" bpmnElement="Task_0lnxj4a">
         <dc:Bounds x="1508" y="375" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_117tc8l_di" bpmnElement="DataOutputAssociation_117tc8l">
+        <di:waypoint xsi:type="dc:Point" x="382" y="274" />
+        <di:waypoint xsi:type="dc:Point" x="587" y="195" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BusinessRuleTask_0swhvya_di" bpmnElement="define_importance">
+        <dc:Bounds x="845" y="592" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataInputAssociation_09e50j1_di" bpmnElement="DataInputAssociation_09e50j1">
+        <di:waypoint xsi:type="dc:Point" x="612" y="208" />
+        <di:waypoint xsi:type="dc:Point" x="612" y="375" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0by54j6_di" bpmnElement="DataOutputAssociation_0by54j6">
+        <di:waypoint xsi:type="dc:Point" x="495" y="487" />
+        <di:waypoint xsi:type="dc:Point" x="602" y="208" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
