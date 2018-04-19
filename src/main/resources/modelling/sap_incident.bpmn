@@ -224,7 +224,7 @@
         <bpmn:targetRef>Property_1iipfle</bpmn:targetRef>
       </bpmn:dataInputAssociation>
     </bpmn:serviceTask>
-    <bpmn:userTask id="record_incident" name="Record incident" camunda:assignee="taulant">
+    <bpmn:userTask id="record_incident" name="Record incident" camunda:formKey="description" camunda:candidateGroups="user">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="priority" label="priority" type="enum" defaultValue="low">
@@ -233,6 +233,7 @@
             <camunda:value id="high" name="high" />
             <camunda:value id="urgent" name="urgent" />
           </camunda:formField>
+          <camunda:formField id="description" label="description" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1hkxkqf</bpmn:incoming>
