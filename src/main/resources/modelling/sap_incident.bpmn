@@ -67,7 +67,7 @@
       <bpmn:outgoing>SequenceFlow_0csuiu6</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_1d2xzz3" sourceRef="evaluate_possibilities" targetRef="ExclusiveGateway_1b9ll3j" />
-    <bpmn:exclusiveGateway id="ExclusiveGateway_1b9ll3j" name="Solution can be found internally?">
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1b9ll3j" name="Potential solution found?">
       <bpmn:incoming>SequenceFlow_1d2xzz3</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0v4chon</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_04bauob</bpmn:outgoing>
@@ -357,7 +357,7 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_1b9ll3j_di" bpmnElement="ExclusiveGateway_1b9ll3j" isMarkerVisible="true">
         <dc:Bounds x="870" y="390" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="857" y="443" width="76" height="25" />
+          <dc:Bounds x="852" y="443" width="87" height="24" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0v4chon_di" bpmnElement="SequenceFlow_0v4chon">
