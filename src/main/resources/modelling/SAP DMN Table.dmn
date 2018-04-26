@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions_1ij6hj8" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="decision" name="Hire External Consultant">
+    <decisionTable id="decisionTable">
+      <input id="input1" label="Core Process">
+        <inputExpression id="inputExpression1" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1pxn803">
+          <text><![CDATA["CLB","FSN","TiVAC","TM","No"]]></text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1fv0pkp" label="Urgent">
+        <inputExpression id="LiteralExpression_0vqpple" typeRef="boolean" />
+      </input>
+      <input id="InputClause_1rbslla" label="Important">
+        <inputExpression id="LiteralExpression_0sxfk2m" typeRef="boolean" />
+      </input>
+      <output id="output1" label="Hire Consultant" name="" typeRef="boolean" />
+      <rule id="row-934675544-1">
+        <description>proceed with external consulting</description>
+        <inputEntry id="UnaryTests_0v6iugb">
+          <text><![CDATA["CLB", "FSN", "TiVAC", "TM"]]></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05rh1fj">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r7xfyh">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_01p8mb8">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-934675544-2">
+        <description>proceed with external consulting</description>
+        <inputEntry id="UnaryTests_0nqctwo">
+          <text><![CDATA["No"]]></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xdu718">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0he7jg8">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_071xyey">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-934675544-3">
+        <description>proceed with external consulting</description>
+        <inputEntry id="UnaryTests_1myesjm">
+          <text><![CDATA["No"]]></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0pd27xe">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0eptu45">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1xw1g0l">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-934675544-4">
+        <description>proceed with work-around</description>
+        <inputEntry id="UnaryTests_1uva22b">
+          <text><![CDATA["No"]]></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0oeefnm">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0i9x6bz">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vtykol">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-934675544-5">
+        <description>Ignore, no solution needed now</description>
+        <inputEntry id="UnaryTests_0qzrf7e">
+          <text><![CDATA["No"]]></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qzt1p9">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18m1e2k">
+          <text>false</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0il7kgi">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
