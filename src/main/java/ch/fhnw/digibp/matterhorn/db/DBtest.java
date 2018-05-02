@@ -15,7 +15,6 @@ public class DBtest {
     }
 
     private static void sqlConnection() throws Exception {
-
         //connection to db
         con = DriverManager.getConnection("jdbc:mysql://35.187.33.54:3306/matterhorn", "root", "knut");
 
