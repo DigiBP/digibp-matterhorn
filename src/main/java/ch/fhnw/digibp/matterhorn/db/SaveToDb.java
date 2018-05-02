@@ -8,6 +8,7 @@ import javax.inject.Named;
 public class SaveToDb implements JavaDelegate {
 
     public void execute(DelegateExecution execution){
+        
         execution.setVariable("delegateExecuteData", "delegate execute result: " + execution.getVariable("sampleData"));
     }
 }
