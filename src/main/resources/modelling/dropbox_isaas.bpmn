@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.11.3">
+  <bpmn:process id="Process_1" name="File to dropbox" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Content written">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="content" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:outgoing>SequenceFlow_1hw96ct</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1hw96ct" sourceRef="StartEvent_1" targetRef="Task_0zku2ym" />
+    <bpmn:userTask id="Task_0zku2ym" name="Rieview the file content" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="file" label="File" type="string" />
+          <camunda:formField id="path" label="Path" type="string" />
+          <camunda:formField id="content" label="Content" type="string" />
+          <camunda:formField id="review" label="Review" type="string" />
+          <camunda:formField id="approved" label="Approved" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1hw96ct</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0iw698q</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0xu0z3k">
+      <bpmn:incoming>SequenceFlow_0iw698q</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1t8juyy</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0xkst2u</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_0iw698q" sourceRef="Task_0zku2ym" targetRef="ExclusiveGateway_0xu0z3k" />
+    <bpmn:sequenceFlow id="SequenceFlow_1t8juyy" name="yes" sourceRef="ExclusiveGateway_0xu0z3k" targetRef="service_task_creatifile_on_dropbox">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved==true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="service_task_creatifile_on_dropbox" name="create / publish new file in dropbox with approved content">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url"><![CDATA[https://prod-38.westus.logic.azure.com:443/workflows/3ccd47a56dd94b0bbb8f45111a452ecf/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=QQiuFO_QX9lwHhSh0C6NmJ_niNuywTe5ifwspqdhD4s]]></camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript"><![CDATA[var data = execution.getVariable("content");
+var file = execution.getVariable("file");
+var path = execution.getVariable("path");
+var out = { "content":data, "file": file, "path":path};
+JSON.stringify(out);]]></camunda:script>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1t8juyy</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1kvjsaz</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1kvjsaz" sourceRef="service_task_creatifile_on_dropbox" targetRef="Task_18zd2v5" />
+    <bpmn:userTask id="Task_18zd2v5" name="Show success message" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="success" label="success" type="string" defaultValue="File created successfully in dropbox" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1kvjsaz</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0j6950n</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0xkst2u" name="no" sourceRef="ExclusiveGateway_0xu0z3k" targetRef="Task_0bpvd8d">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${approved==false}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Task_0bpvd8d" name="Content is rejected" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="error" label="error" type="string" defaultValue="Content rejected, won&#39;t be published" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0xkst2u</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1f8j0q0</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_05zj1bx">
+      <bpmn:incoming>SequenceFlow_1f8j0q0</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0j6950n</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0hs8m3y</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="SequenceFlow_1f8j0q0" sourceRef="Task_0bpvd8d" targetRef="ExclusiveGateway_05zj1bx" />
+    <bpmn:sequenceFlow id="SequenceFlow_0j6950n" sourceRef="Task_18zd2v5" targetRef="ExclusiveGateway_05zj1bx" />
+    <bpmn:endEvent id="EndEvent_1lzqh3q">
+      <bpmn:incoming>SequenceFlow_0hs8m3y</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0hs8m3y" sourceRef="ExclusiveGateway_05zj1bx" targetRef="EndEvent_1lzqh3q" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="154" y="138" width="74" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1hw96ct_di" bpmnElement="SequenceFlow_1hw96ct">
+        <di:waypoint xsi:type="dc:Point" x="209" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="278" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="243.5" y="99" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0owecmv_di" bpmnElement="Task_0zku2ym">
+        <dc:Bounds x="278" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0xu0z3k_di" bpmnElement="ExclusiveGateway_0xu0z3k" isMarkerVisible="true">
+        <dc:Bounds x="460" y="95" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="485" y="149" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0iw698q_di" bpmnElement="SequenceFlow_0iw698q">
+        <di:waypoint xsi:type="dc:Point" x="378" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="460" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="419" y="99" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1t8juyy_di" bpmnElement="SequenceFlow_1t8juyy">
+        <di:waypoint xsi:type="dc:Point" x="485" y="145" />
+        <di:waypoint xsi:type="dc:Point" x="485" y="178" />
+        <di:waypoint xsi:type="dc:Point" x="485" y="178" />
+        <di:waypoint xsi:type="dc:Point" x="485" y="213" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="491" y="172" width="19" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1ugshbg_di" bpmnElement="service_task_creatifile_on_dropbox">
+        <dc:Bounds x="436" y="213" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1kvjsaz_di" bpmnElement="SequenceFlow_1kvjsaz">
+        <di:waypoint xsi:type="dc:Point" x="536" y="253" />
+        <di:waypoint xsi:type="dc:Point" x="632" y="253" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="584" y="232" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_188c701_di" bpmnElement="Task_18zd2v5">
+        <dc:Bounds x="632" y="213" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0xkst2u_di" bpmnElement="SequenceFlow_0xkst2u">
+        <di:waypoint xsi:type="dc:Point" x="485" y="95" />
+        <di:waypoint xsi:type="dc:Point" x="485" y="31" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="494" y="57" width="13" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_02ou7da_di" bpmnElement="Task_0bpvd8d">
+        <dc:Bounds x="435" y="-49" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_05zj1bx_di" bpmnElement="ExclusiveGateway_05zj1bx" isMarkerVisible="true">
+        <dc:Bounds x="657.49" y="95" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="682.49" y="149" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1f8j0q0_di" bpmnElement="SequenceFlow_1f8j0q0">
+        <di:waypoint xsi:type="dc:Point" x="535" y="-9" />
+        <di:waypoint xsi:type="dc:Point" x="682" y="-9" />
+        <di:waypoint xsi:type="dc:Point" x="682" y="95" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="608.5" y="-30" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0j6950n_di" bpmnElement="SequenceFlow_0j6950n">
+        <di:waypoint xsi:type="dc:Point" x="682" y="213" />
+        <di:waypoint xsi:type="dc:Point" x="682" y="180" />
+        <di:waypoint xsi:type="dc:Point" x="682" y="180" />
+        <di:waypoint xsi:type="dc:Point" x="682" y="145" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="697" y="174" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_1lzqh3q_di" bpmnElement="EndEvent_1lzqh3q">
+        <dc:Bounds x="825.49" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="843.49" y="142" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0hs8m3y_di" bpmnElement="SequenceFlow_0hs8m3y">
+        <di:waypoint xsi:type="dc:Point" x="707" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="826" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="766.5" y="99" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

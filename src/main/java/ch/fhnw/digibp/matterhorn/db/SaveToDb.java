@@ -10,10 +10,14 @@ public class SaveToDb implements JavaDelegate {
 
     static Connection con;
     static Statement sta;
+    static int ticketID;
+    static String processId;
     
     public void execute(DelegateExecution execution) throws Exception{
         sqlConnection();
-        sqlInsert("5", "From Camunda");
+        processId = execution.getProcessInstanceId();
+        claimTicket();
+        //sqlInsert("6", "From Camunda");
         //sqlQuery();
         execution.setVariable("delegateExecuteData", "delegate execute result: " + execution.getVariable("sampleData"));
     }
@@ -40,6 +44,20 @@ public class SaveToDb implements JavaDelegate {
         PreparedStatement pst = con.prepareStatement("INSERT INTO `matterhorn`.`tickets` (`id`, `description`) VALUES (?,?);");
         pst.setString(1, id);
         pst.setString(2, desc);
+        pst.execute();
+        pst.close();
+    }
+    
+    private static void claimTicket() throws Exception {
+        ResultSet res = sta.executeQuery("SELECT id FROM matterhorn.tickets where camunda_instance is null limit 1");
+        String ticketId = null;
+        while (res.next()) {
+            ticketId = Integer.toString(res.getShort(1));
+        }
+        
+        PreparedStatement pst = con.prepareStatement("UPDATE `matterhorn`.`tickets` SET `camunda_instance`=? WHERE `id`=?;");
+        pst.setString(1, processId);
+        pst.setString(2, ticketId);
         pst.execute();
         pst.close();
     }

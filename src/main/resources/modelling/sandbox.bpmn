@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.11.3">
+  <bpmn:process id="sandbox" isExecutable="true">
+    <bpmn:serviceTask id="claimTicket" name="claim ticket">
+      <bpmn:extensionElements>
+        <camunda:connector>
+          <camunda:inputOutput>
+            <camunda:inputParameter name="url">https://hooks.zapier.com/hooks/catch/3273861/a2lie6/</camunda:inputParameter>
+            <camunda:inputParameter name="method">POST</camunda:inputParameter>
+            <camunda:inputParameter name="headers">
+              <camunda:map>
+                <camunda:entry key="Content-Type">application/json</camunda:entry>
+              </camunda:map>
+            </camunda:inputParameter>
+            <camunda:inputParameter name="payload">
+              <camunda:script scriptFormat="JavaScript"><![CDATA[camundaInstance = execution.getProcessInstanceId();
+     out = JSON.stringify({
+        "camundaInstance": camundaInstance
+     });]]></camunda:script>
+            </camunda:inputParameter>
+          </camunda:inputOutput>
+          <camunda:connectorId>http-connector</camunda:connectorId>
+        </camunda:connector>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1itlsz0</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0eadceb</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="EndEvent_1owlthu">
+      <bpmn:incoming>SequenceFlow_0eadceb</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0eadceb" sourceRef="claimTicket" targetRef="EndEvent_1owlthu" />
+    <bpmn:startEvent id="StartEvent_1a15lzh">
+      <bpmn:outgoing>SequenceFlow_1itlsz0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1itlsz0" sourceRef="StartEvent_1a15lzh" targetRef="claimTicket" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="sandbox">
+      <bpmndi:BPMNShape id="ServiceTask_14aaa9a_di" bpmnElement="claimTicket">
+        <dc:Bounds x="347" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1owlthu_di" bpmnElement="EndEvent_1owlthu">
+        <dc:Bounds x="522" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="540" y="142" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0eadceb_di" bpmnElement="SequenceFlow_0eadceb">
+        <di:waypoint xsi:type="dc:Point" x="447" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="522" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="484.5" y="99" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartEvent_1a15lzh_di" bpmnElement="StartEvent_1a15lzh">
+        <dc:Bounds x="101" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="119" y="142" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1itlsz0_di" bpmnElement="SequenceFlow_1itlsz0">
+        <di:waypoint xsi:type="dc:Point" x="137" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="347" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="242" y="99" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

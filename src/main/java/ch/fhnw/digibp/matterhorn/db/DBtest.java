@@ -9,8 +9,9 @@ public class DBtest {
 
     public static void main(String[] args) throws Exception {
         sqlConnection();
+        claimTicket();
         //sqlInsert("4", "It's ID 4");
-        sqlQuery();
+        //sqlQuery();
 
     }
 
@@ -36,6 +37,20 @@ public class DBtest {
         PreparedStatement pst = con.prepareStatement("INSERT INTO `matterhorn`.`tickets` (`id`, `description`) VALUES (?,?);");
         pst.setString(1, id);
         pst.setString(2, desc);
+        pst.execute();
+        pst.close();
+    }
+
+    private static void claimTicket() throws Exception {
+        ResultSet res = sta.executeQuery("SELECT id FROM matterhorn.tickets where camunda_instance is null limit 1");
+        String ticketId = null;
+        while (res.next()) {
+            ticketId = Integer.toString(res.getShort(1));
+        }
+
+        PreparedStatement pst = con.prepareStatement("UPDATE `matterhorn`.`tickets` SET `camunda_instance`=? WHERE `id`=?;");
+        pst.setString(1, "this is a simple test");
+        pst.setString(2, ticketId);
         pst.execute();
         pst.close();
     }
