@@ -265,7 +265,7 @@ JSON.stringify(out);]]></camunda:script>
       <bpmn:outgoing>SequenceFlow_1d2xzz3</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_00oxll2" sourceRef="preprocessIncident" targetRef="supporterEvaluation" />
-    <bpmn:userTask id="supporterEvaluation" name="Evaluate the incident and find a solution." camunda:formKey="embedded:app:forms/evaluateIncident.html">
+    <bpmn:userTask id="supporterEvaluation" name="Evaluate the incident and find a solution." camunda:formKey="embedded:app:forms/evaluateIncident.html" camunda:assignee="an_owner" camunda:candidateGroups="owner">
       <bpmn:incoming>SequenceFlow_00oxll2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1d16i0f</bpmn:outgoing>
     </bpmn:userTask>
