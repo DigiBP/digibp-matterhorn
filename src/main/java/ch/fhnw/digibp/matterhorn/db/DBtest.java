@@ -9,9 +9,9 @@ public class DBtest {
 
     public static void main(String[] args) throws Exception {
         sqlConnection();
-        claimTicket();
+        //claimTicket();
         //sqlInsert("4", "It's ID 4");
-        //sqlQuery();
+        sqlQuery();
 
     }
 
@@ -29,7 +29,7 @@ public class DBtest {
 
         //process result set
         while (res.next()) {
-            System.out.println(res.getShort(1) + ", " + res.getString("description"));
+            System.out.println(res.getShort(1) + ", " + res.getString("description") + ", " +res.getString("sentiment_score"));
         }
     }
 

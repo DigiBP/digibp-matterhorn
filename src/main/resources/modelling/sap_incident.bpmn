@@ -16,6 +16,7 @@
         <bpmn:flowNodeRef>Task_093bb6a</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>ExclusiveGateway_1mbecce</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>preprocessIncident</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>fetchData</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_1lot22q" name="SAP service owner">
         <bpmn:flowNodeRef>Task_16btmyl</bpmn:flowNodeRef>
@@ -42,7 +43,7 @@
     </bpmn:laneSet>
     <bpmn:sequenceFlow id="SequenceFlow_1hkxkqf" sourceRef="incidentStart" targetRef="userReview" />
     <bpmn:sequenceFlow id="SequenceFlow_1ppzupg" sourceRef="userReview" targetRef="preprocessIncident" />
-    <bpmn:userTask id="userReview" name="Review and submit the incident " camunda:candidateGroups="user">
+    <bpmn:userTask id="userReview" name="Review and submit the incident " camunda:assignee="demo" camunda:candidateGroups="user">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="description" label="description" type="string" />
@@ -82,6 +83,7 @@
           <camunda:formField id="type" label="Type" type="string" defaultValue="request" />
           <camunda:formField id="solution" label="Solution" type="string" />
           <camunda:formField id="sentiment" label="Sentiment Score" type="string" />
+          <camunda:formField id="owner" label="SAP service owner" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_1hkxkqf</bpmn:outgoing>
@@ -154,7 +156,7 @@
     <bpmn:endEvent id="EndEvent_0b95hcr">
       <bpmn:incoming>SequenceFlow_10oowim</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Task_0lnxj4a" name="Implement the solution">
+    <bpmn:userTask id="Task_0lnxj4a" name="Implement the solution" camunda:assignee="${owner}">
       <bpmn:incoming>SequenceFlow_06r4dvq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_08bjxpc</bpmn:outgoing>
     </bpmn:userTask>
@@ -170,12 +172,12 @@
       <bpmn:incoming>SequenceFlow_1oue3b0</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_05kwkyc</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:userTask id="Task_1k6us0r" name="Define external consultant">
+    <bpmn:userTask id="Task_1k6us0r" name="Define external consultant" camunda:assignee="${owner}">
       <bpmn:incoming>SequenceFlow_1gv2udi</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0qrq7bn</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1oue3b0</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_1iyj299" name="Define workaround">
+    <bpmn:userTask id="Task_1iyj299" name="Define workaround" camunda:assignee="${owner}">
       <bpmn:incoming>SequenceFlow_1ffuyq3</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1ds0e0k</bpmn:outgoing>
     </bpmn:userTask>
@@ -189,7 +191,7 @@
       <bpmn:outgoing>SequenceFlow_06r4dvq</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_13gaha4</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Task_16btmyl" name="Evaluate solution">
+    <bpmn:userTask id="Task_16btmyl" name="Evaluate solution" camunda:assignee="${owner}">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="evaluation_sol" label="evaluation_sol" type="boolean" />
@@ -250,7 +252,7 @@ JSON.stringify(out);]]></camunda:script>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1d16i0f" sourceRef="supporterEvaluation" targetRef="Task_0k8ge22" />
     <bpmn:dataStoreReference id="DataStoreReference_0am1dzm" name="Database" />
-    <bpmn:userTask id="evaluate_possibilities" name="backup evaluation" camunda:candidateGroups="owner">
+    <bpmn:userTask id="evaluate_possibilities" name="backup evaluation" camunda:assignee="${owner}" camunda:candidateGroups="owner">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="evaluation_pos" label="evaluation_pos" type="boolean" />
@@ -264,22 +266,33 @@ JSON.stringify(out);]]></camunda:script>
       <bpmn:incoming>SequenceFlow_0b37bnm</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1d2xzz3</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_00oxll2" sourceRef="preprocessIncident" targetRef="supporterEvaluation" />
-    <bpmn:userTask id="supporterEvaluation" name="Evaluate the incident and find a solution." camunda:formKey="embedded:app:forms/evaluateIncident.html" camunda:assignee="an_owner" camunda:candidateGroups="owner">
-      <bpmn:incoming>SequenceFlow_00oxll2</bpmn:incoming>
+    <bpmn:sequenceFlow id="SequenceFlow_00oxll2" sourceRef="preprocessIncident" targetRef="fetchData" />
+    <bpmn:userTask id="supporterEvaluation" name="Evaluate the incident and find a solution." camunda:formKey="embedded:app:forms/evaluateIncident.html" camunda:assignee="${owner}" camunda:candidateGroups="owner">
+      <bpmn:incoming>SequenceFlow_1agymte</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1d16i0f</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_0b37bnm" sourceRef="Task_0k8ge22" targetRef="evaluate_possibilities" />
-    <bpmn:userTask id="Task_0k8ge22" name="check change">
+    <bpmn:userTask id="Task_0k8ge22" name="check change" camunda:assignee="${owner}">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="description" label="description" type="string" />
           <camunda:formField id="solution" label="Solution" type="string" />
+          <camunda:formField id="sentiment" label="Sentiment" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1d16i0f</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0b37bnm</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1agymte" sourceRef="fetchData" targetRef="supporterEvaluation" />
+    <bpmn:serviceTask id="fetchData" name="Fetch asignee and sentiment score" camunda:delegateExpression="${fetchDbData}">
+      <bpmn:incoming>SequenceFlow_00oxll2</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1agymte</bpmn:outgoing>
+      <bpmn:property id="Property_118pzh2" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1kzpypk">
+        <bpmn:sourceRef>DataStoreReference_0am1dzm</bpmn:sourceRef>
+        <bpmn:targetRef>Property_118pzh2</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:process id="Process_1i9b6ca" isExecutable="false" />
   <bpmn:message id="Message_158ccjn" name="proposal" />
@@ -607,9 +620,9 @@ JSON.stringify(out);]]></camunda:script>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_00oxll2_di" bpmnElement="SequenceFlow_00oxll2">
         <di:waypoint xsi:type="dc:Point" x="498" y="223" />
-        <di:waypoint xsi:type="dc:Point" x="498" y="375" />
+        <di:waypoint xsi:type="dc:Point" x="498" y="243" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="513" y="293" width="0" height="12" />
+          <dc:Bounds x="468" y="227" width="90" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_1lcohfo_di" bpmnElement="supporterEvaluation">
@@ -625,6 +638,20 @@ JSON.stringify(out);]]></camunda:script>
       <bpmndi:BPMNShape id="UserTask_1ledppc_di" bpmnElement="Task_0k8ge22">
         <dc:Bounds x="570" y="375" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1agymte_di" bpmnElement="SequenceFlow_1agymte">
+        <di:waypoint xsi:type="dc:Point" x="498" y="323" />
+        <di:waypoint xsi:type="dc:Point" x="498" y="375" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="513" y="343" width="0" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1n0wm71_di" bpmnElement="fetchData">
+        <dc:Bounds x="448" y="243" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1kzpypk_di" bpmnElement="DataInputAssociation_1kzpypk">
+        <di:waypoint xsi:type="dc:Point" x="693" y="196" />
+        <di:waypoint xsi:type="dc:Point" x="548" y="280" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
