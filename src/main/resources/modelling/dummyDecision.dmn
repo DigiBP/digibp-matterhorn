@@ -10,8 +10,9 @@
           <text><![CDATA[""CLB"",""FSN"",""TiVAC"",""TM"",""no""]]></text>
         </inputValues>
       </input>
-      <output id="output1" label="decDummy" name="decDummy" typeRef="boolean" />
+      <output id="output1" label="decDummy" name="CONSULTANT_REQ" typeRef="boolean" />
       <rule id="row-399937762-1">
+        <description></description>
         <inputEntry id="UnaryTests_1fvo69v">
           <text><![CDATA["CLB", "FSN", "TiVAC", "TM"]]></text>
         </inputEntry>
@@ -20,6 +21,7 @@
         </outputEntry>
       </rule>
       <rule id="row-399937762-2">
+        <description></description>
         <inputEntry id="UnaryTests_0ma3arc">
           <text><![CDATA["no"]]></text>
         </inputEntry>

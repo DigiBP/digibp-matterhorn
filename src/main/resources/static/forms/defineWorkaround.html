@@ -10,11 +10,11 @@
 	<p>Type: <input type="text" id="type" cam-variable-name="type" /></p>
 	<p>Incident description:</p>
 	<p><textarea id="description" name="description" type="text" cam-variable-name="description" style="height:250px;width:600px;" /></textarea></p>
-	<p>Solution: 	(Request external consultant? 
-		<select cam-variable-name="CONSULTANT_REQ" cam-variable-type="Boolean">
+	<p>Solution:	(Request external consultant? 
+		<select cam-variable-name="CONSULTANT_REQ" cam-variable-type="Boolean" disabled>
 			<option value="false">No</option>
 			<option value="true">Yes</option>
-		</select>)
+		</select> <b>Your request was declined! Please define a workaround.</b>)
 	</p>
 	<p><textarea id="solution" name="solution" cam-variable-name="solution"  style="height:250px;width:600px;" autofocus /></textarea></p>
 </form>

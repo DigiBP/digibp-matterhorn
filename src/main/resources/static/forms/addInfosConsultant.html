@@ -1,8 +1,9 @@
 <form>
 
 <label for="ticket">Incident</label>
+	<p><b>Please add some information for the external consultant: </b></p>
+	<p><textarea id="consultantInfo" name="consultantInfo" type="text" cam-variable-name="consultantInfo" cam-variable-type="String" style="height:250px;width:600px;" autofocus /></textarea></p>
 	<p>From: <input type="email" id="email" cam-variable-name="email" /></p>
-	
 	<p>Core process? <input type="text" name="coreprocess" id="coreprocess" cam-variable-name="coreprocess" cam-variable-type="String" /></input> </p>
 	<p>Transaction: <input type="text" id="transaction" cam-variable-name="transaction" /></p>
 	<p>Importance: <input type="text" id="importance" cam-variable-name="importance" /></p>
@@ -10,11 +11,10 @@
 	<p>Type: <input type="text" id="type" cam-variable-name="type" /></p>
 	<p>Incident description:</p>
 	<p><textarea id="description" name="description" type="text" cam-variable-name="description" style="height:250px;width:600px;" /></textarea></p>
-	<p>Solution: 	(Request external consultant? 
-		<select cam-variable-name="CONSULTANT_REQ" cam-variable-type="Boolean">
-			<option value="false">No</option>
+	<p>Solution:	(Request external consultant? 
+		<select cam-variable-name="CONSULTANT_REQ" cam-variable-type="Boolean" disabled>
 			<option value="true">Yes</option>
-		</select>)
+		</select> <b>Your request was approved!</b>)
 	</p>
-	<p><textarea id="solution" name="solution" cam-variable-name="solution"  style="height:250px;width:600px;" autofocus /></textarea></p>
+	<p><textarea id="solution" name="solution" cam-variable-name="solution"  style="height:250px;width:600px;" /></textarea></p>
 </form>
