@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions_1k828v2" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="tblDummy" name="tblDummy">
+    <decisionTable id="decisionTable">
+      <input id="input1" label="coreprocess" camunda:inputVariable="">
+        <inputExpression id="inputExpression1" typeRef="string">
+          <text>coreprocess</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1nhcm94">
+          <text><![CDATA[""CLB"",""FSN"",""TiVAC"",""TM"",""no""]]></text>
+        </inputValues>
+      </input>
+      <output id="output1" label="decDummy" name="decDummy" typeRef="boolean" />
+      <rule id="row-399937762-1">
+        <inputEntry id="UnaryTests_1fvo69v">
+          <text><![CDATA["CLB", "FSN", "TiVAC", "TM"]]></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07szmsn">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-399937762-2">
+        <inputEntry id="UnaryTests_0ma3arc">
+          <text><![CDATA["no"]]></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1viu8wd">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
