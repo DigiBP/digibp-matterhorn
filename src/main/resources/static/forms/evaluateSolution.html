@@ -3,7 +3,7 @@
 <label for="ticket">Incident</label>
 
 	<p>Solution: 	(External consultant requested? <input type="text" cam-variable-name="CONSULTANT_REQ" disabled>)<br>
-	Sucessfully tested <input type="checkbox" name="evaluation_sol" cam-variable-name="evaluation_sol" cam-variable-type="boolean"> </p>
+	Sucessfully tested <input type="checkbox" id="evaluation_sol" name="evaluation_sol" value="" onclick="myFunction()" cam-variable-name="evaluation_sol" cam-variable-type="String"</p>
 
 	<p><textarea id="solution" name="solution" cam-variable-name="solution"  style="height:250px;width:600px;" autofocus /></textarea></p>
 
@@ -16,3 +16,18 @@
 	<p>Incident description:</p>
 	<p><textarea id="description" name="description" type="text" cam-variable-name="description" style="height:250px;width:600px;" /></textarea></p>
 </form>
+
+<script>
+function myFunction() {
+  // Get the checkbox
+  var checkBox = document.getElementById("evaluation_sol");
+
+  // If the checkbox is checked, display the output text
+  if (checkBox.checked == true){
+  	checkBox.value = "acceptable";
+    } else {
+    	checkBox.value = "";
+    }
+}
+
+</script>
