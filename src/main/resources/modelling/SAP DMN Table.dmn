@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="definitions_1ij6hj8" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions_1ij6hj8" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
   <decision id="decision" name="Hire External Consultant">
+    <extensionElements>
+      <biodi:bounds x="200" y="200" width="180" height="80" />
+    </extensionElements>
     <decisionTable id="decisionTable">
       <input id="input1" label="Core Process">
         <inputExpression id="inputExpression1" typeRef="string">
@@ -10,11 +13,19 @@
           <text><![CDATA["CLB","FSN","TiVAC","TM","No"]]></text>
         </inputValues>
       </input>
-      <input id="InputClause_1fv0pkp" label="Urgent">
-        <inputExpression id="LiteralExpression_0vqpple" typeRef="boolean" />
+      <input id="InputClause_1fv0pkp" label="Urgent" camunda:inputVariable="">
+        <inputExpression id="LiteralExpression_0vqpple" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_118tufz">
+          <text><![CDATA["Very","Medium","Low"]]></text>
+        </inputValues>
       </input>
-      <input id="InputClause_1rbslla" label="Important">
-        <inputExpression id="LiteralExpression_0sxfk2m" typeRef="boolean" />
+      <input id="InputClause_1rbslla" label="Affacted User">
+        <inputExpression id="LiteralExpression_0sxfk2m" typeRef="string" />
+        <inputValues id="UnaryTests_14p1mpt">
+          <text><![CDATA["Business","Department","User Group"]]></text>
+        </inputValues>
       </input>
       <output id="output1" label="Hire Consultant" name="" typeRef="boolean" />
       <rule id="row-934675544-1">
@@ -38,10 +49,10 @@
           <text><![CDATA["No"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0xdu718">
-          <text>true</text>
+          <text><![CDATA["Very", "Medium"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0he7jg8">
-          <text>true</text>
+          <text><![CDATA["Business", "Department", "User Group"]]></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_071xyey">
           <text>true</text>
@@ -53,42 +64,27 @@
           <text><![CDATA["No"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0pd27xe">
-          <text>true</text>
+          <text><![CDATA["Low"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0eptu45">
-          <text>false</text>
+          <text><![CDATA["Business", "Department"]]></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1xw1g0l">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="row-934675544-4">
-        <description>proceed with work-around</description>
+        <description>Ignore, no solution needed now</description>
         <inputEntry id="UnaryTests_1uva22b">
           <text><![CDATA["No"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0oeefnm">
-          <text>false</text>
+          <text><![CDATA["Low"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0i9x6bz">
-          <text>true</text>
+          <text><![CDATA["User Group"]]></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1vtykol">
-          <text>false</text>
-        </outputEntry>
-      </rule>
-      <rule id="row-934675544-5">
-        <description>Ignore, no solution needed now</description>
-        <inputEntry id="UnaryTests_0qzrf7e">
-          <text><![CDATA["No"]]></text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_1qzt1p9">
-          <text>false</text>
-        </inputEntry>
-        <inputEntry id="UnaryTests_18m1e2k">
-          <text>false</text>
-        </inputEntry>
-        <outputEntry id="LiteralExpression_0il7kgi">
           <text>false</text>
         </outputEntry>
       </rule>
