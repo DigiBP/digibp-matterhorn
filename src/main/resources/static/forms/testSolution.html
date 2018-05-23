@@ -1,11 +1,12 @@
 <form>
 
 <label for="ticket">Incident</label>
-	<p><b>Tick the box if your test was sucessful: </b><input type="checkbox" id="evaluation_sol" name="evaluation_sol" value="" onclick="myFunction()" cam-variable-name="evaluation_sol" cam-variable-type="String"><br>
-	<p>Solution: 	(External consultant requested? <input type="text" cam-variable-name="CONSULTANT_REQ" disabled>)
+	<p><b>Test the solution and assess the result</b><br>
+	Incident resolved: <input type="checkbox" id="success" name="success" value="false" onclick="myFunction()" cam-variable-name="success" cam-variable-type="String">
 	</p>
-
-	<p><textarea id="solution" name="solution" cam-variable-name="solution"  style="height:250px;width:600px;" autofocus /></textarea></p>
+	<p>Additional information from the supporter: <br>
+		<textarea id="userInfo" name="userInfo" type="text" cam-variable-name="userInfo" cam-variable-type="String" style="height:250px;width:600px;" autofocus /></textarea>
+	</p>
 
 	<p>From: <input type="email" id="email" cam-variable-name="email" /></p>
 	<p>Core process? <input type="text" name="coreprocess" id="coreprocess" cam-variable-name="coreprocess" cam-variable-type="String" /></input> </p>
@@ -20,13 +21,13 @@
 <script>
 function myFunction() {
   // Get the checkbox
-  var checkBox = document.getElementById("evaluation_sol");
+  var checkBox = document.getElementById("success");
 
   // If the checkbox is checked, display the output text
   if (checkBox.checked == true){
-  	checkBox.value = "acceptable";
+  	checkBox.value = "true";
     } else {
-    	checkBox.value = "";
+    	checkBox.value = "false";
     }
 }
 
