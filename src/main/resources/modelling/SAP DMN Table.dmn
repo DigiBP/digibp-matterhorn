@@ -21,10 +21,12 @@
           <text><![CDATA["Very","Medium","Low"]]></text>
         </inputValues>
       </input>
-      <input id="InputClause_1rbslla" label="Affacted User">
-        <inputExpression id="LiteralExpression_0sxfk2m" typeRef="string" />
+      <input id="InputClause_1rbslla" label="Affacted User" camunda:inputVariable="affactedUser">
+        <inputExpression id="LiteralExpression_0sxfk2m" typeRef="string">
+          <text></text>
+        </inputExpression>
         <inputValues id="UnaryTests_14p1mpt">
-          <text><![CDATA["Business","Department","Project Team"]]></text>
+          <text><![CDATA["Business","Department","User group"]]></text>
         </inputValues>
       </input>
       <output id="output1" label="Hire Consultant" name="" typeRef="boolean" />
