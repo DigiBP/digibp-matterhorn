@@ -24,7 +24,7 @@
       <input id="InputClause_1rbslla" label="Affacted User">
         <inputExpression id="LiteralExpression_0sxfk2m" typeRef="string" />
         <inputValues id="UnaryTests_14p1mpt">
-          <text><![CDATA["Business","Department","User Group"]]></text>
+          <text><![CDATA["Business","Department","Project Team"]]></text>
         </inputValues>
       </input>
       <output id="output1" label="Hire Consultant" name="" typeRef="boolean" />
@@ -49,10 +49,10 @@
           <text><![CDATA["No"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0xdu718">
-          <text><![CDATA["Very", "Medium"]]></text>
+          <text><![CDATA["Very"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0he7jg8">
-          <text><![CDATA["Business", "Department", "User Group"]]></text>
+          <text></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_071xyey">
           <text>true</text>
@@ -64,17 +64,17 @@
           <text><![CDATA["No"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0pd27xe">
-          <text><![CDATA["Low"]]></text>
+          <text><![CDATA["Medium"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0eptu45">
-          <text><![CDATA["Business"]]></text>
+          <text><![CDATA["Business", "Department"]]></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1xw1g0l">
           <text>true</text>
         </outputEntry>
       </rule>
       <rule id="row-934675544-4">
-        <description>Ignore, no solution needed now</description>
+        <description>proceed with external consulting</description>
         <inputEntry id="UnaryTests_1uva22b">
           <text><![CDATA["No"]]></text>
         </inputEntry>
@@ -82,9 +82,24 @@
           <text><![CDATA["Low"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0i9x6bz">
-          <text><![CDATA["User Group", "Department"]]></text>
+          <text><![CDATA["Business"]]></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1vtykol">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="row-100100864-1">
+        <description><![CDATA[don't hire a consultant]]></description>
+        <inputEntry id="UnaryTests_0srmhn2">
+          <text><![CDATA["No"]]></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04c4ld1">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14z92wq">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nwiy2b">
           <text>false</text>
         </outputEntry>
       </rule>
