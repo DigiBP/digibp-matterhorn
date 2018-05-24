@@ -1,17 +1,17 @@
 <form>
 
-<label for="ticket">Incident</label>
+<label for="ticket"><u>Incident </u><input type="text" id="id" cam-variable-name="id" disabled style="border:none;background:white;text-decoration-line: underline;" /></label>
 	<p><b>Tick the box if your test was sucessful: </b><input type="checkbox" id="evaluation_sol" name="evaluation_sol" value="" onclick="myFunction()" cam-variable-name="evaluation_sol" cam-variable-type="String"><br>
 	<p>Solution: 	(External consultant requested? <input type="text" cam-variable-name="CONSULTANT_REQ" disabled>)
 	</p>
 
-	<p><textarea id="solution" name="solution" cam-variable-name="solution"  style="height:250px;width:600px;" autofocus /></textarea></p>
+	<p><textarea id="solution" name="solution" cam-variable-name="solution" placeholder="Please enter your solution in this field" style="height:250px;width:600px;" autofocus /></textarea></p>
 
-	<p>From: <input type="email" id="email" cam-variable-name="email" /></p>
+	<p>From: <input type="email" id="email" cam-variable-name="email" disabled /></p>
 	<p>Core process? <input type="text" name="coreprocess" id="coreprocess" cam-variable-name="coreprocess" cam-variable-type="String" /></input> </p>
 	<p>Transaction: <input type="text" id="transaction" cam-variable-name="transaction" /></p>
-	<p>Importance: <input type="text" id="importance" cam-variable-name="importance" /></p>
-	<p>Sentiment: <input type="text" id="sentiment" cam-variable-name="sentiment" /></p>
+	<p>Affected user: <input type="text" id="affectedUser" cam-variable-name="affectedUser" /></p>
+	<p>Urgency: <input type="text" id="urgency" cam-variable-name="urgency" /></p>
 	<p>Type: <input type="text" id="type" cam-variable-name="type" /></p>
 	<p>Incident description:</p>
 	<p><textarea id="description" name="description" type="text" cam-variable-name="description" style="height:250px;width:600px;" /></textarea></p>

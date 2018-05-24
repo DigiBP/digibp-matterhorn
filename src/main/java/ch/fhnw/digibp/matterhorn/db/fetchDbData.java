@@ -14,8 +14,9 @@ public class fetchDbData implements JavaDelegate {
     static int ticketID;
     //static String processId;
     static String owner;
-    static String sentiment;
+    static double sentiment;
     static String id;
+    static String urgency;
 
     public void execute(DelegateExecution execution) throws Exception {
         sqlConnection();
@@ -23,9 +24,20 @@ public class fetchDbData implements JavaDelegate {
         while (id == null) { //try again until zapier saved the data into the database
             getRow(processInstance);
         }
-        
+                
+        if (sentiment < 0.25) {
+            urgency = "Very";
+        } else if (sentiment < 0.5){
+            urgency = "Medium";
+        } else {
+            urgency = "Low";        
+    }
+        execution.setVariable("urgency", urgency);
         execution.setVariable("sentiment", sentiment);
         execution.setVariable("owner", owner);
+        execution.setVariable("id", id);
+        
+        id = null; //reset the variable (the running program keeps it assigned)
     }
 
     private static void sqlConnection() throws Exception {
@@ -40,7 +52,7 @@ public class fetchDbData implements JavaDelegate {
         TimeUnit.SECONDS.sleep(1); // time to finish the previous task (zapier)
         ResultSet res = sta.executeQuery("SELECT * FROM tickets where camunda_instance = \"" + processInst + "\"");
         while (res.next()) {
-            sentiment = res.getString("sentiment_score");
+            sentiment = Double.parseDouble(res.getString("sentiment_score"));
             owner = res.getString("owner");
             id = res.getString("id");
         }

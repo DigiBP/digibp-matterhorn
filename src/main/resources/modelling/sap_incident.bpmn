@@ -43,7 +43,7 @@
     </bpmn:laneSet>
     <bpmn:sequenceFlow id="SequenceFlow_1hkxkqf" sourceRef="incidentStart" targetRef="userReview" />
     <bpmn:sequenceFlow id="SequenceFlow_1ppzupg" sourceRef="userReview" targetRef="preprocessIncident" />
-    <bpmn:userTask id="userReview" name="Review and submit the incident " camunda:formKey="embedded:app:forms/submitIncident.html" camunda:assignee="Manuel" camunda:candidateGroups="user">
+    <bpmn:userTask id="userReview" name="Review and submit the incident " camunda:formKey="embedded:app:forms/submitIncident.html" camunda:candidateGroups="user">
       <bpmn:extensionElements>
         <camunda:formData />
       </bpmn:extensionElements>
@@ -57,12 +57,13 @@
           <camunda:formField id="description" label="Description" type="string" defaultValue="Test description" />
           <camunda:formField id="email" label="Email" type="string" defaultValue="m.frieder@bluewin.ch" />
           <camunda:formField id="transaction" label="Transaction" type="string" defaultValue="FAGLL03" />
-          <camunda:formField id="importance" label="Importance" type="string" defaultValue="1" />
+          <camunda:formField id="affectedUser" label="Affected User" type="string" defaultValue="Department" />
           <camunda:formField id="type" label="Type" type="string" defaultValue="request" />
           <camunda:formField id="solution" label="Solution" type="string" />
           <camunda:formField id="sentiment" label="Sentiment Score" type="string" />
           <camunda:formField id="owner" label="SAP service owner" type="string" />
           <camunda:formField id="id" label="ID" type="string" />
+          <camunda:formField id="urgency" label="Urgency" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_1hkxkqf</bpmn:outgoing>
@@ -143,10 +144,10 @@ var email = execution.getVariable("email");
 var description = execution.getVariable("description");
 var coreprocess = execution.getVariable("coreprocess");
 var transaction = execution.getVariable("transaction");
-var importance = execution.getVariable("importance");
+var affectedUser = execution.getVariable("affectedUser");
 var camundaInstance = execution.getProcessInstanceId();
 
-var out = {"type": type, "email": email, "camundaInstance": camundaInstance, "description": description, "coreprocess": coreprocess, "transaction": transaction, "importance": importance};
+var out = {"type": type, "email": email, "camundaInstance": camundaInstance, "description": description, "coreprocess": coreprocess, "transaction": transaction, "affectedUser": affectedUser};
 JSON.stringify(out);]]></camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
@@ -178,7 +179,7 @@ JSON.stringify(out);]]></camunda:script>
         <bpmn:targetRef>Property_118pzh2</bpmn:targetRef>
       </bpmn:dataInputAssociation>
     </bpmn:serviceTask>
-    <bpmn:businessRuleTask id="checkConsultantRequirement" name="Check if a consultant should be hired" camunda:resultVariable="CONSULTANT_REQ" camunda:decisionRef="tblDummy" camunda:mapDecisionResult="singleEntry">
+    <bpmn:businessRuleTask id="checkConsultantRequirement" name="Check if a consultant should be hired" camunda:resultVariable="CONSULTANT_REQ" camunda:decisionRef="decision" camunda:mapDecisionResult="singleEntry">
       <bpmn:incoming>SequenceFlow_04bauob</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0e2jkxd</bpmn:outgoing>
     </bpmn:businessRuleTask>
@@ -272,15 +273,18 @@ JSON.stringify(out);]]></camunda:script>
               </camunda:map>
             </camunda:inputParameter>
             <camunda:inputParameter name="payload">
-              <camunda:script scriptFormat="JavaScript"><![CDATA[var type= execution.getVariable("type");
+              <camunda:script scriptFormat="JavaScript"><![CDATA[var id = execution.getVariable("id");
 var email = execution.getVariable("email");
+var type= execution.getVariable("type");
 var description = execution.getVariable("description");
 var coreprocess = execution.getVariable("coreprocess");
 var transaction = execution.getVariable("transaction");
-var importance = execution.getVariable("importance");
-var id = execution.getVariable("id");
+var urgency = execution.getVariable("urgency");
+var solution = execution.getVariable("solution");
+var affectedUser = execution.getVariable("affectedUser");
+var success = execution.getVariable("success");
 
-var out = {"type": type, "email": email, "id": id, "description": description, "coreprocess": coreprocess, "transaction": transaction, "importance": importance};
+var out = { "id": id, "email": email, "type": type, "type": type, "description": description, "coreprocess": coreprocess, "transaction": transaction, "urgency": urgency, "solution": solution, "affectedUser": affectedUser, "success": success};
 JSON.stringify(out);]]></camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
@@ -301,7 +305,7 @@ JSON.stringify(out);]]></camunda:script>
     <bpmn:boundaryEvent id="BoundaryEvent_03zvphw" attachedToRef="checkResult">
       <bpmn:outgoing>SequenceFlow_04cxslz</bpmn:outgoing>
       <bpmn:timerEventDefinition>
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT5M</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT3M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:exclusiveGateway id="ExclusiveGateway_1mbecce" name="Incident solved?">
@@ -320,7 +324,7 @@ JSON.stringify(out);]]></camunda:script>
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
-            <camunda:inputParameter name="url">https://hooks.zapier.com/hooks/catch/3273861/a5liwm/</camunda:inputParameter>
+            <camunda:inputParameter name="url">https://hooks.zapier.com/hooks/catch/3273861/ai4yyv/</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
@@ -500,9 +504,9 @@ JSON.stringify(out);]]></camunda:script>
         <di:waypoint xsi:type="dc:Point" x="1429" y="390" />
         <di:waypoint xsi:type="dc:Point" x="1429" y="326" />
         <di:waypoint xsi:type="dc:Point" x="718" y="326" />
-        <di:waypoint xsi:type="dc:Point" x="718" y="372" />
+        <di:waypoint xsi:type="dc:Point" x="718" y="375" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1411" y="365" width="14" height="12" />
+          <dc:Bounds x="1411" y="365" width="15" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1oue3b0_di" bpmnElement="SequenceFlow_1oue3b0">
