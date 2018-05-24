@@ -67,7 +67,7 @@
           <text><![CDATA["Low"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0eptu45">
-          <text><![CDATA["Business", "Department"]]></text>
+          <text><![CDATA["Business"]]></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1xw1g0l">
           <text>true</text>
@@ -82,7 +82,7 @@
           <text><![CDATA["Low"]]></text>
         </inputEntry>
         <inputEntry id="UnaryTests_0i9x6bz">
-          <text><![CDATA["User Group"]]></text>
+          <text><![CDATA["User Group", "Department"]]></text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1vtykol">
           <text>false</text>
