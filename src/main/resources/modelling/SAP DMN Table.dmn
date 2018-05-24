@@ -13,7 +13,7 @@
           <text><![CDATA["CLB","FSN","TiVAC","TM","No"]]></text>
         </inputValues>
       </input>
-      <input id="InputClause_1fv0pkp" label="Urgent" camunda:inputVariable="">
+      <input id="InputClause_1fv0pkp" label="Urgency" camunda:inputVariable="">
         <inputExpression id="LiteralExpression_0vqpple" typeRef="string">
           <text></text>
         </inputExpression>
