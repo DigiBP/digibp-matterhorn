@@ -1,7 +1,7 @@
 <form>
 
 <label for="ticket"><u>Incident </u><input type="text" id="id" cam-variable-name="id" disabled style="border:none;background:white;text-decoration-line: underline;" /></label>
-	<p>From: <input type="email" id="email" cam-variable-name="email" /></p>
+	<p>From: <input type="email" id="email" cam-variable-name="email" disabled /></p>
 	
 	<p>Core process? <input type="text" name="coreprocess" id="coreprocess" cam-variable-name="coreprocess" cam-variable-type="String" /></input> </p>
 	<p>Transaction: <input type="text" id="transaction" cam-variable-name="transaction" /></p>
@@ -16,5 +16,5 @@
 			<option value="true">Yes</option>
 		</select>)
 	</p>
-	<p><textarea id="solution" name="solution" cam-variable-name="solution" placeholder="Please enter your solution in this field" style="height:250px;width:600px;" autofocus /></textarea></p>
+	<p><textarea id="solution" type="text" name="solution" cam-variable-name="solution" placeholder="Please enter your solution in this field" style="height:250px;width:600px;" autofocus /></textarea></p>
 </form>
