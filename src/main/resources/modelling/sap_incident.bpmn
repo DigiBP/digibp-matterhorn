@@ -127,7 +127,7 @@
       <bpmn:outgoing>SequenceFlow_0v4chon</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_04bauob</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="preprocessIncident" name="Preprocess the data and notify participants">
+    <bpmn:serviceTask id="preprocessIncident" name="Assign owner, analyse the sentiment and notify participants">
       <bpmn:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -200,8 +200,9 @@ var email = execution.getVariable("email");
 var owner= execution.getVariable("owner");
 var transaction = execution.getVariable("transaction");
 var userInfo= execution.getVariable("userInfo");
+var id = execution.getVariable("id");
 
-var out = {"type": type, "email": email, "owner": owner, "transaction": transaction, "userInfo": userInfo};
+var out = {"type": type, "email": email, "owner": owner, "transaction": transaction, "userInfo": userInfo, "id": id};
 JSON.stringify(out);]]></camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
@@ -283,8 +284,9 @@ var urgency = execution.getVariable("urgency");
 var solution = execution.getVariable("solution");
 var affectedUser = execution.getVariable("affectedUser");
 var success = execution.getVariable("success");
+var owner= execution.getVariable("owner");
 
-var out = { "id": id, "email": email, "type": type, "type": type, "description": description, "coreprocess": coreprocess, "transaction": transaction, "urgency": urgency, "solution": solution, "affectedUser": affectedUser, "success": success};
+var out = { "id": id, "email": email, "type": type, "type": type, "description": description, "coreprocess": coreprocess, "transaction": transaction, "urgency": urgency, "solution": solution, "affectedUser": affectedUser, "success": success, "owner": owner};
 JSON.stringify(out);]]></camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
@@ -294,6 +296,9 @@ JSON.stringify(out);]]></camunda:script>
       <bpmn:incoming>SequenceFlow_1o2m6bg</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_04cxslz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_10oowim</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1wo2lgk">
+        <bpmn:targetRef>DataStoreReference_0am1dzm</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
     <bpmn:userTask id="checkResult" name="Test the solution and check the result" camunda:formKey="embedded:app:forms/testSolution.html" camunda:candidateGroups="user">
       <bpmn:extensionElements>
@@ -337,8 +342,9 @@ var email = execution.getVariable("email");
 var owner= execution.getVariable("owner");
 var transaction = execution.getVariable("transaction");
 var userInfo= execution.getVariable("userInfo");
+var id = execution.getVariable("id");
 
-var out = {"type": type, "email": email, "owner": owner, "transaction": transaction, "userInfo": userInfo};
+var out = {"type": type, "email": email, "owner": owner, "transaction": transaction, "userInfo": userInfo, "id": id};
 JSON.stringify(out);]]></camunda:script>
             </camunda:inputParameter>
           </camunda:inputOutput>
@@ -714,6 +720,11 @@ JSON.stringify(out);]]></camunda:script>
       <bpmndi:BPMNShape id="UserTask_06h9zib_di" bpmnElement="Task_16svtsd">
         <dc:Bounds x="1379" y="476" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1wo2lgk_di" bpmnElement="DataOutputAssociation_1wo2lgk">
+        <di:waypoint xsi:type="dc:Point" x="2089" y="243" />
+        <di:waypoint xsi:type="dc:Point" x="2089" y="185" />
+        <di:waypoint xsi:type="dc:Point" x="743" y="185" />
+      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
