@@ -1,102 +1,4 @@
 id,description,email,transaction,type,coreprocess,owner,affectedUser,solution,status,camunda_instance,sentiment_score,urgency,success
-1,test,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,placeholder,NULL,NULL,NULL
-2,"insert from class",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,placeholder,NULL,NULL,NULL
-3,"insert from java class",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,placeholder,NULL,NULL,NULL
-4,"It's ID 4",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,placeholder,NULL,NULL,NULL
-5,"From Camunda",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,placeholder,NULL,NULL,NULL
-8,"test from zapier",NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,placeholder,NULL,NULL,NULL
-9,blablub,manuel@frieder.ch,fagll03,failure,true,NULL,2,NULL,NULL,placeholder,NULL,NULL,NULL
-10,"the report shows a different result as usual please check",manuel.frieder@gmail.com,FBL5N,failure,true,manuel.frieder@students.fhnw.ch,1,NULL,assigned,placeholder,NULL,NULL,NULL
-11,blabla,manuel@frieder.com,FBL5N,failure,true,NULL,1,NULL,NULL,placeholder,NULL,NULL,NULL
-12,"when I run the report it doesn't work as expected the results are wrong please check",manuel.frieder@gmail.com,FAGLL03,request,true,manuel.frieder@students.fhnw.ch,1,NULL,assigned,"this is a simple test",NULL,NULL,NULL
-13,"I have to talk fast now because I have to make it back",m.frieder@bluewin.ch,FB03,failure,false,manuel.frieder@students.fhnw.ch,1,NULL,assigned,def178f9-55c7-11e8-99d1-00ff0680cc42,NULL,NULL,NULL
-14,fast,m.frieder@bluewin.ch,FAGLL03,request,true,manuel.frieder@students.fhnw.ch,1,NULL,assigned,abcTest,NULL,NULL,NULL
-15,"Another test to check",manuel.frieder@gmail.com,FBL5N,failure,false,manuel.frieder@students.fhnw.ch,2,NULL,assigned,"this is a simple test",NULL,NULL,NULL
-16,"the system shows different results at the usual",m.frieder@bluewin.ch,FBL1N,request,false,manuel.frieder@students.fhnw.ch,1,NULL,assigned,f9e604f9-5871-11e8-a175-00ff0680cc42,NULL,NULL,NULL
-17,"the system shows different results at the usual",m.frieder@bluewin.ch,FBL1N,request,false,manuel.frieder@students.fhnw.ch,1,NULL,assigned,5dec8e6d-5872-11e8-a175-00ff0680cc42,0.7462853193280000,NULL,NULL
-18,"the transaction shows in there when I went to start it",m.frieder@bluewin.ch,FBL1N,request,true,manuel.frieder@students.fhnw.ch,3,NULL,assigned,9e435251-5875-11e8-9552-00ff0680cc42,0.5000000000000000,NULL,NULL
-19,"play something I can lend money to the customer",manuel.frieder@students.fhnw.ch,FAGLL03,request,true,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL
-20,"sap is not working well",m.frieder@bluewin.ch,FBL1N,request,No,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL
-21,"Test description",m.frieder@bluewin.ch,FAGLL03,request,TiVAC,Manuel,1,NULL,assigned,337cbd3d-5a70-11e8-ab3f-00ff0680cc42,0.1776888966560000,NULL,NULL
-22,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,affa03b0-5a93-11e8-a950-00ff0680cc42,0.1776888966560000,NULL,NULL
-23,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,068d2ee9-5a96-11e8-823f-00ff0680cc42,0.1776888966560000,NULL,NULL
-24,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,9ab1cdab-5a99-11e8-823f-00ff0680cc42,0.1776888966560000,NULL,NULL
-25,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,22aacbb3-5abc-11e8-aaa9-00ff0680cc42,0.1776888966560000,NULL,NULL
-26,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,c3dc0dd8-5abc-11e8-a842-00ff0680cc42,0.1776888966560000,NULL,NULL
-27,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,3b85e79a-5abd-11e8-a842-00ff0680cc42,0.1776888966560000,NULL,NULL
-28,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,83232f18-5abd-11e8-a842-00ff0680cc42,0.1776888966560000,NULL,NULL
-29,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,6d519819-5abe-11e8-9f1a-00ff0680cc42,0.1776888966560000,NULL,NULL
-30,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,9b2c0751-5abe-11e8-9f1a-00ff0680cc42,0.1776888966560000,NULL,NULL
-31,"Test description",m.frieder@bluewin.ch,FAGLL03,request,TiVAC,Manuel,1,NULL,assigned,4bbf82ed-5ac1-11e8-9f1a-00ff0680cc42,0.1776888966560000,NULL,NULL
-32,"Test description",m.frieder@bluewin.ch,FAGLL03,request,CLB,Manuel,1,NULL,assigned,9dc44fa8-5ac7-11e8-abe3-7e701dfd130c,0.1776888966560000,NULL,NULL
-33,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,dbe1d6d4-5ac8-11e8-bbfc-2ee78a69213d,0.1776888966560000,NULL,NULL
-34,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,16286e48-5b36-11e8-ac98-00ff0680cc42,0.1776888966560000,NULL,NULL
-35,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,6f899891-5b36-11e8-ac98-00ff0680cc42,0.1776888966560000,NULL,NULL
-36,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,46232ffe-5b37-11e8-bf2b-00ff0680cc42,0.1776888966560000,NULL,NULL
-37,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,0373bcc9-5b39-11e8-bf2b-00ff0680cc42,0.1776888966560000,NULL,NULL
-38,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,cc550f38-5b39-11e8-9483-00ff0680cc42,0.1776888966560000,NULL,NULL
-39,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,2b42dc30-5b3b-11e8-835a-00ff0680cc42,0.1776888966560000,NULL,NULL
-40,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,d1a9bc35-5b3b-11e8-8bb6-00ff0680cc42,0.1776888966560000,NULL,NULL
-41,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,e7cdc28b-5b46-11e8-ae67-00ff0680cc42,0.1776888966560000,NULL,NULL
-42,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,23d83e74-5b47-11e8-ae67-00ff0680cc42,0.1776888966560000,NULL,NULL
-43,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,60f589ef-5b47-11e8-ae67-00ff0680cc42,0.1776888966560000,NULL,NULL
-44,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,06bad2e0-5b48-11e8-ba83-00ff0680cc42,0.1776888966560000,NULL,NULL
-45,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,7397a119-5b48-11e8-ba83-00ff0680cc42,0.1776888966560000,NULL,NULL
-46,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,ed9c5ad2-5b48-11e8-ba83-00ff0680cc42,0.1776888966560000,NULL,NULL
-47,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,907898f1-5b4a-11e8-aa57-00ff0680cc42,0.1776888966560000,NULL,NULL
-48,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,0db412f0-5b4b-11e8-b215-00ff0680cc42,0.1776888966560000,NULL,NULL
-49,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,44784ecb-5b4b-11e8-b215-00ff0680cc42,0.1776888966560000,NULL,NULL
-50,"SAP is constantly slow. Make it faster asap!!!",m.frieder@bluewin.ch,FAGLL03,failure,CLB,Manuel,2,NULL,assigned,a92de77c-5b4c-11e8-9e01-00ff0680cc42,0.1888177990910000,NULL,NULL
-51,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,c6ab89d9-5b4d-11e8-9e01-00ff0680cc42,0.1776888966560000,NULL,NULL
-52,"We are running the Q2 inventory provision for Mar18 closing.After updated MRN1, in process of ZINVVAL in step2 and 3 with variant "INVVAL_051", MRN1 setting appeared not the same as setting in MRN1 in 1st step. It showed warning "No material number interval entered. Please check." Attached is the shotscreen for reference. Can you please help to advise this issue? So soory that I haven't try to run testing before.  Please let me know if you may have further questions.",m.frieder@bluewin.ch,FB03,NULL,no,Manuel,1,NULL,assigned,1151491b-5b6e-11e8-b2e5-4aba2d1e27f5,0.2243419289590000,NULL,NULL
-53,"Please setup Group chart of accounts functionalities from SPRO Consolidation Preparation (New) re G/L and FS Chart of accounts. Mapping is being reviewed at the moment and will be added to this ticket when ready. Group chart Name shall be SCHA.",m.frieder@bluewin.ch,MIR4,NULL,no,Milan,1,NULL,assigned,cb91afc7-5b6f-11e8-b2e5-4aba2d1e27f5,0.5000000000000000,NULL,NULL
-54,"if 80 is not working well make the program better because it causes serious time issues",m.frieder@bluewin.ch,FBL5N,failure,no,Manuel,5,NULL,assigned,6a22d693-5b71-11e8-b2e5-4aba2d1e27f5,0.1567267477510000,NULL,NULL
-55,"For Extended warranty and maintenance contracts (actually in PQ only, list of articles see attached Excel sheets) the Result Analysis and Settlement must be different to existing service item articles. There must be no WIP and no missing cost and no Price variance. All actual costs must be expensed to Non Quality costs in the month they incurred. ",m.frieder@bluewin.ch,mir4,failure,no,Milan,5,NULL,assigned,bf72bd55-5b71-11e8-b2e5-4aba2d1e27f5,0.5000000000000000,NULL,NULL
-56,"this is bullshit. I'm tired of testing",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,8ddb70fd-5cd8-11e8-8ebb-00ff0680cc42,0.0119501948357000,NULL,NULL
-57,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,b9b09957-5cd8-11e8-8ebb-00ff0680cc42,0.1776888966560000,NULL,NULL
-58,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,db7f6280-5cd8-11e8-8ebb-00ff0680cc42,0.1776888966560000,NULL,NULL
-59,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,1a4d4429-5cd9-11e8-8ebb-00ff0680cc42,0.1776888966560000,NULL,NULL
-60,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,4e2ed272-5cd9-11e8-8ebb-00ff0680cc42,0.1776888966560000,NULL,NULL
-61,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,84b0867b-5cd9-11e8-8e27-00ff0680cc42,0.1776888966560000,NULL,NULL
-62,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,0886911d-5cdb-11e8-8f9b-00ff0680cc42,0.1776888966560000,NULL,NULL
-63,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,75535977-5cdb-11e8-8960-00ff0680cc42,0.1776888966560000,NULL,NULL
-64,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,9024477f-5cdb-11e8-8960-00ff0680cc42,0.1776888966560000,NULL,NULL
-65,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,a58afda9-5cdc-11e8-ad49-00ff0680cc42,0.1776888966560000,NULL,NULL
-66,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,2035e1b4-5cdd-11e8-8bca-00ff0680cc42,0.1776888966560000,NULL,NULL
-67,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,d30ba493-5ce2-11e8-924d-00ff0680cc42,0.1776888966560000,NULL,NULL
-68,"Please create a new version and test it. This does not work.",m.frieder@bluewin.ch,FAGLL03,request,CLB,Manuel,1,NULL,assigned,298ae4ab-5ce3-11e8-924d-00ff0680cc42,0.1606287956240000,NULL,NULL
-69,"Test description",m.frieder@bluewin.ch,FAGLL03,request,CLB,Manuel,1,NULL,assigned,d9346008-5ce3-11e8-9e97-00ff0680cc42,0.1776888966560000,NULL,NULL
-70,"well done, great deployment!",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,2c8594c2-5ce8-11e8-a42a-00ff0680cc42,0.9793366789820000,NULL,NULL
-71,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,1e80d6a6-5ceb-11e8-b2c4-00ff0680cc42,0.1776888966560000,NULL,NULL
-72,"Test description",m.frieder@bluewin.ch,FAGLL03,request,CLB,Manuel,1,NULL,assigned,c2d1cfcc-5ceb-11e8-b2c4-00ff0680cc42,0.1776888966560000,NULL,NULL
-73,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,bbdf1e36-5cf3-11e8-b5df-00ff0680cc42,0.1776888966560000,NULL,NULL
-74,"I need your help for a tax report.",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,b0bf743f-5cf5-11e8-8c2a-00ff0680cc42,0.1123314797880000,NULL,NULL
-75,"Test description",m.frieder@bluewin.ch,FAGLL03,request,CLB,Manuel,1,NULL,assigned,4dc0e846-5cf9-11e8-bb0e-00ff0680cc42,0.1776888966560000,NULL,NULL
-76,"Test description",m.frieder@bluewin.ch,FAGLL03,request,TiVAC,Manuel,1,NULL,assigned,1369ec2a-5cfd-11e8-8f31-00ff0680cc42,0.1776888966560000,NULL,NULL
-77,"Everything goes wrong",m.frieder@bluewin.ch,FAGLL03,request,TM,Manuel,1,NULL,assigned,ba95506f-5d04-11e8-920e-00ff0680cc42,0.0234322845936000,NULL,NULL
-78,"Test description",m.frieder@bluewin.ch,FAGLL03,request,TM,Manuel,1,NULL,assigned,f0e730cb-5d06-11e8-9138-00ff0680cc42,0.1776888966560000,NULL,NULL
-79,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,8e5a3fca-5d0c-11e8-9138-00ff0680cc42,0.1776888966560000,NULL,NULL
-80,"The transaction shows different results. Please fix it",M.frieder@bluewin.ch,FBL1N,Failure,FSN,Manuel,5,NULL,assigned,057fd030-5d1c-11e8-a234-dacc0c008108,0.2530882358550000,NULL,NULL
-81,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,26da75c6-5d2e-11e8-8ee7-00ff0680cc42,0.1776888966560000,NULL,NULL
-82,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,2e239feb-5d30-11e8-8a1b-00ff0680cc42,0.1776888966560000,NULL,NULL
-83,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,c18d70af-5d32-11e8-8a1b-00ff0680cc42,0.1776888966560000,NULL,NULL
-84,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,efe1fb9a-5d33-11e8-8a1b-00ff0680cc42,0.1776888966560000,NULL,NULL
-85,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,375993b4-5d34-11e8-8a1b-00ff0680cc42,0.1776888966560000,NULL,NULL
-86,"We need to issue a credit memo to a customer for a duplicate invoice that was made in error. When we attempt to issue the credit memo, we receive an error message, stating that account 300000 Gross Sales TP can only be posted to internally.",m.frieder@bluewin.ch,FBL5N,failure,no,Manuel,4,NULL,assigned,9dfdbb7d-5e86-11e8-82b4-961173f7746a,0.0986584722996000,NULL,NULL
-87,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,ba734980-5eb1-11e8-9f07-00ff0680cc42,0.1776888966560000,NULL,NULL
-88,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,1514e698-5eb6-11e8-ac7e-00ff0680cc42,0.1776888966560000,NULL,NULL
-89,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,6b89654b-5eb8-11e8-b62f-00ff0680cc42,0.1776888966560000,NULL,NULL
-90,"Test description",m.frieder@bluewin.ch,FAGLL03,request,TiVAC,Manuel,1,NULL,assigned,8c275d62-5ebd-11e8-a925-00ff0680cc42,0.1776888966560000,NULL,NULL
-91,"Test description",m.frieder@bluewin.ch,FAGLL03,request,TM,Manuel,1,NULL,assigned,98619e54-5ec6-11e8-a82d-00ff0680cc42,0.1776888966560000,NULL,NULL
-92,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,47f3a553-5ec8-11e8-bd89-00ff0680cc42,0.1776888966560000,NULL,NULL
-93,"We registered a new branch in February 2018.The branch number will relate to VAT report. May you please  help to add branch number 0001 in SAP",m.frieder@bluewin.ch,FB03,request,FSN,Manuel,6,NULL,assigned,3c3fe27e-5f1d-11e8-ba72-a20f1fdfd312,0.7458080649380000,NULL,NULL
-94,"if 80 is not working well make the program better because it causes serious time issues",m.frieder@bluewin.ch,FBL5N,failure,TiVAC,Manuel,5,NULL,assigned,ccc8453b-5f1c-11e8-ba72-a20f1fdfd312,0.1567267477510000,NULL,NULL
-95,blablabla,milan.kostic@students.fhnw.ch,ME13,request,CLB,Milan,10,NULL,assigned,6018f390-5f45-11e8-a881-da5516699f08,0.7532451748850000,NULL,NULL
-96,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,1,NULL,assigned,685e3074-5f47-11e8-a881-da5516699f08,0.1776888966560000,NULL,NULL
-97,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,NULL,NULL,assigned,78d62766-5f6b-11e8-9a07-00ff0680cc42,0.1776888966560000,NULL,NULL
-98,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,NULL,NULL,assigned,9a0e868e-5f6c-11e8-891f-00ff0680cc42,0.1776888966560000,NULL,NULL
-99,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,NULL,NULL,assigned,91415837-5f6e-11e8-905b-00ff0680cc42,0.1776888966560000,NULL,NULL
-100,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,NULL,NULL,assigned,203aaad2-5f78-11e8-8814-00ff0680cc42,0.1776888966560000,NULL,NULL
 101,"I cannot enter the transaction. Please help!! It's urgent!!",m.frieder@bluewin.ch,FAGLL03,failure,no,Manuel,NULL,NULL,assigned,0ad0e0fa-5f7a-11e8-8699-00ff0680cc42,0.1433909237380000,NULL,NULL
 102,"May you please help me to handle this problem?",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Department,"It is easy",closed,0458bafb-5f7b-11e8-8234-00ff0680cc42,0.1214608550070000,Very,true
 103,"Very nice program. But make it please a little bit better.",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,NULL,NULL,assigned,e1bf8a93-5f7c-11e8-8234-00ff0680cc42,0.9652241468430000,NULL,NULL
@@ -117,9 +19,7 @@ id,description,email,transaction,type,coreprocess,owner,affectedUser,solution,st
 118,"How much is the fish?",milan.kostic@students.fhnw.ch,FK03,failure,CLB,Manuel,"User group",NULL,closed,a198c852-6309-11e8-9d1e-56a3831effa7,0.5000000000000000,Low,true
 119,"Test descriptionHow much is the fish",m.frieder@bluewin.ch,FK03,failure,CLB,Manuel,"User group","It is ten dollars",closed,27454a92-630c-11e8-9d1e-56a3831effa7,0.1838730275630000,Low,true
 120,"The power is strong in you!",milan.kostic@students.fhnw.ch,MB51,request,TM,Milan,"user group",NULL,closed,3241076b-630c-11e8-9d1e-56a3831effa7,0.2892657220360000,Medium,true
-121,"I am Groot!
-
-He is Groot!",milan.kostic@students.fhnw.ch,MB51,request,No,Milan,department,"yes 10",closed,bd19d60f-6315-11e8-b33c-d269fe2b9a65,0.5000000000000000,Low,true
+121,"I am Groot! He is Groot!",milan.kostic@students.fhnw.ch,MB51,request,No,Milan,department,"yes 10",closed,bd19d60f-6315-11e8-b33c-d269fe2b9a65,0.5000000000000000,Low,true
 122,"Zweiter Versuch",milan.kostic@students.fhnw.ch,MB51,request,TM,Milan,Department,NULL,closed,7479f591-6316-11e8-b33c-d269fe2b9a65,0.5000000000000000,Low,true
 123,"I am Groot!
 
