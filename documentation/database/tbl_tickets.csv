@@ -1,5 +1,4 @@
 id,description,email,transaction,type,coreprocess,owner,affectedUser,solution,status,camunda_instance,sentiment_score,urgency,success
-101,"I cannot enter the transaction. Please help!! It's urgent!!",m.frieder@bluewin.ch,FAGLL03,failure,no,Manuel,NULL,NULL,assigned,0ad0e0fa-5f7a-11e8-8699-00ff0680cc42,0.1433909237380000,NULL,NULL
 102,"May you please help me to handle this problem?",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Department,"It is easy",closed,0458bafb-5f7b-11e8-8234-00ff0680cc42,0.1214608550070000,Very,true
 103,"Very nice program. But make it please a little bit better.",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,NULL,NULL,assigned,e1bf8a93-5f7c-11e8-8234-00ff0680cc42,0.9652241468430000,NULL,NULL
 104,"It doesn't work. What shall I do please?",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Department,"my solution for you",closed,ac8dd92c-5f80-11e8-92d2-00ff0680cc42,0.9838726520540000,Low,true
