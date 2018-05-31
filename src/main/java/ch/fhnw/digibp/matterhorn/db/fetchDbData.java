@@ -25,7 +25,7 @@ public class fetchDbData implements JavaDelegate {
             getRow(processInstance);
         }
                 
-        if (sentiment < 0.25) {
+        if (sentiment < 0.1) {
             urgency = "Very";
         } else if (sentiment < 0.5){
             urgency = "Medium";
