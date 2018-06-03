@@ -1,0 +1,49 @@
+id,description,email,transaction,type,coreprocess,owner,affectedUser,solution,status,camunda_instance,sentiment_score,urgency,success
+102,"May you please help me to handle this problem?",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Department,"It is easy",closed,0458bafb-5f7b-11e8-8234-00ff0680cc42,0.1214608550070000,Very,true
+103,"Very nice program. But make it please a little bit better.",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,NULL,NULL,assigned,e1bf8a93-5f7c-11e8-8234-00ff0680cc42,0.9652241468430000,NULL,NULL
+104,"It doesn't work. What shall I do please?",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Department,"my solution for you",closed,ac8dd92c-5f80-11e8-92d2-00ff0680cc42,0.9838726520540000,Low,true
+105,"You're always very nice to me. Please help me again.",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,NULL,NULL,assigned,1fea3596-5f82-11e8-92d2-00ff0680cc42,0.8046740293500000,NULL,false
+106,"It doesn't work. What shall I do please?",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,NULL,NULL,assigned,43fcb714-5f83-11e8-92d2-00ff0680cc42,0.0959464311600000,NULL,false
+107,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,NULL,NULL,assigned,d3f328a5-5f84-11e8-92d2-00ff0680cc42,0.1776888966560000,NULL,false
+108,"I'm getting angry!",m.frieder@bluewin.ch,FAGLL03,failure,no,Manuel,Department,"calm down!",closed,77e16838-5f85-11e8-91e1-00ff0680cc42,0.0066128075122800,Very,true
+109,"I'm feeling annoyed about this",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Department,"keep cool",closed,f0030950-5f85-11e8-91e1-00ff0680cc42,0.0767587423325000,Medium,true
+110,"I'm doing this one last time",m.frieder@bluewin.ch,FAGLL03,failure,no,Manuel,Department,"then it's solved",closed,3c71140c-5f86-11e8-91e1-00ff0680cc42,0.1649684906010000,Very,false
+111,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Department,solution,closed,52157db6-5ff0-11e8-8967-00ff0680cc42,0.1776888966560000,Very,true
+112,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Department,NULL,assigned,52157db6-5ff0-11e8-8967-00ff0680cc42,0.1776888966560000,NULL,false
+113,"Test description",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Department,"solution is good",closed,8d384016-5ff5-11e8-8b3e-00ff0680cc42,0.1776888966560000,Very,false
+114,"the transaction is not working help me to fix this",m.frieder@bluewin.ch,FB03,request,CLB,Manuel,business,NULL,closed,a76bad24-5ff8-11e8-b107-aa729ebdb955,0.0295666754246000,Very,true
+115,"when I open the transaction",m.frieder@bluewin.ch,FB03,request,TM,Manuel,"User Group",NULL,assigned,a158e453-5ffa-11e8-bfe7-fef5f3608b6b,0.2413087487220000,NULL,false
+116,"test 2",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Department,"test 3",closed,b75bd992-5ffb-11e8-93d9-b6906151506f,0.1776888966560000,Very,true
+117,"I have a question regarding an invoice reversal – can an invoice for a Purchase Order be reversed? I already reversed and reset the payment document, but I don’t see how I can back out the invoice. Purchasing created a PO to the wrong vendor. No one caught it until payment was refused. Is there a way other than creating a credit memo?  Does this make sense?  Let me know – THANKS!!!",m.frieder@bluewin.ch,FAGLL03,request,no,Manuel,Business,"consultant is good",closed,c5eed0e7-5ffc-11e8-93d9-b6906151506f,0.8671165704730000,Low,false
+118,"How much is the fish?",milan.kostic@students.fhnw.ch,FK03,failure,CLB,Manuel,"User group",NULL,closed,a198c852-6309-11e8-9d1e-56a3831effa7,0.5000000000000000,Low,true
+119,"Test descriptionHow much is the fish",m.frieder@bluewin.ch,FK03,failure,CLB,Manuel,"User group","It is ten dollars",closed,27454a92-630c-11e8-9d1e-56a3831effa7,0.1838730275630000,Low,true
+120,"The power is strong in you!",milan.kostic@students.fhnw.ch,MB51,request,TM,Milan,"user group",NULL,closed,3241076b-630c-11e8-9d1e-56a3831effa7,0.2892657220360000,Medium,true
+121,"I am Groot! He is Groot!",milan.kostic@students.fhnw.ch,MB51,request,No,Milan,department,"yes 10",closed,bd19d60f-6315-11e8-b33c-d269fe2b9a65,0.5000000000000000,Low,true
+122,"Zweiter Versuch",milan.kostic@students.fhnw.ch,MB51,request,TM,Milan,Department,NULL,closed,7479f591-6316-11e8-b33c-d269fe2b9a65,0.5000000000000000,Low,true
+123,"I am Groot!
+
+He is Groot!",m.frieder@bluewin.ch,FAGLL03,request,No,Manuel,department,test,closed,db4bfa44-6316-11e8-b33c-d269fe2b9a65,0.1838730275630000,Low,true
+124,"I am Groot, test 2
+
+Yes, you are Groot, test 2",milan.kostic@students.fhnw.ch,MB51,request,TM,Milan,Department,"I know a solution and it costs less that $10!",closed,c201fdc5-631a-11e8-8e49-ee26dc5e81c5,0.7221755385400000,Low,false
+125,"The problem is I can not change the customers name.
+
+He can not change the customers name...
+
+",milan.kostic@gmx.ch,MB51,failure,TM,Milan,business,"The customer had to restart his PC, because there was an update over night...",closed,9aa0382f-631e-11e8-8e49-ee26dc5e81c5,0.0554491877556000,Very,true
+126,"I can not change the names of our customers.
+
+
+Blablabla...",milan.kostic@gmx.ch,MB51,request,TM,Milan,business,"bbbbb
+
+ccccc
+
+ddddd",closed,08612e9c-6320-11e8-8e49-ee26dc5e81c5,0.1834005415440000,Very,true
+127,"blablabla2
+
+
+clclclcl",milan.kostic@gmx.ch,MB51,request,FSN,Milan,business,hhhhh,closed,0910e558-6322-11e8-8e49-ee26dc5e81c5,0.7526739239690000,Low,true
+128,blablabla,milan.kostic@gmx.ch,MB51,request,TM,Milan,"user group",dfafaf,closed,7af81d54-6334-11e8-9fec-6e86a3f7c35a,0.7526739239690000,Low,true
+129,"the force is strong with this one",milan.kostic@gmx.ch,MB51,request,TM,Milan,Department,NULL,closed,1c272a95-6337-11e8-9fec-6e86a3f7c35a,0.7417684793470000,Low,true
+130,"I am your father",milan.kostic@gmx.ch,MB51,request,TM,Milan,Business,NULL,closed,0c4496d0-6338-11e8-9fec-6e86a3f7c35a,0.8511630296710000,Low,true
+131,"Your my hart",milan.kostic@students.fhnw.ch,MB51,failure,TM,Milan,Business,NULL,closed,d0eab081-6338-11e8-9fec-6e86a3f7c35a,0.7194831371310000,Low,true
